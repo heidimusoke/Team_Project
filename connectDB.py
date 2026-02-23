@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect
 import sqlite3
 
-app = Flask(__name__)   # <-- THIS must come before any @app.route
+app = Flask(__name__)   
 
 def getDbConnection():
     conn = sqlite3.connect("AirPlaneSystem.db")
@@ -46,5 +46,6 @@ def editFlight(flightID):
 def addFlight():
     conn=getDbConnection()
     conn.close()
+
 
 print(editFlight(2))
