@@ -1,7 +1,10 @@
 from flask import Flask, render_template, request, redirect
 import sqlite3
+from flask import jsonify
 
-app = Flask(__name__)   
+app = Flask(__name__)  
+
+
 
 def getDbConnection():
     conn = sqlite3.connect("AirPlaneSystem.db")
@@ -33,7 +36,9 @@ def editFlight(flightID):
                      SET departure = ?, destination = ?, departureDate = ?, departureTime = ?, arrivalDate = ?, arrivalTime = ?, numberSeats =?, airlineID = ?  WHERE flightNumber = ?""", (dept, dest, deptDate, deptTime, arrDate, arrTime, numSeats, airlineID, flightID))
         conn.commit()
         conn.close()
-        return redirect("/showFlight")
+        #return redirect("/showFlight")
+        return jsonify({"message": "Flight updated"})
+
 
         # GET REQUEST FOR THE FORM
     flight = conn.execute("SELECT * FROM Flight WHERE flightNumber =?", (flightID,)).fetchone()
@@ -47,5 +52,7 @@ def addFlight():
     conn=getDbConnection()
     conn.close()
 
+if __name__ == "__main__":
+    app.run(debug=True)
 
-print(editFlight(2))
+
