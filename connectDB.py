@@ -5,14 +5,14 @@ from flask import jsonify
 app = Flask(__name__)  
 
 
-
 def getDbConnection():
     conn = sqlite3.connect("AirPlaneSystem.db")
     conn.row_factory = sqlite3.Row
     return conn
+
 ####################################################
 #Flight
-#################################################
+####################################################
 @app.route("/showFlight/<int:flightID>", methods = ["GET"])
 def showFlights(flightID):
     conn = getDbConnection()
@@ -101,10 +101,14 @@ def removeFlight(bookingID):
     conn = getDbConnection()
     conn.close()
 
-#This must be at end of file
-if __name__ == "__main__":
-    app.run(debug=True)
+
 
 #############################################
 #Airline
 #############################################
+
+
+
+#This must be at end of file
+if __name__ == "__main__":
+    app.run(debug=True)
