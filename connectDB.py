@@ -39,7 +39,7 @@ def editFlight(flightID):
                      SET departure = ?, destination = ?, departureDate = ?, departureTime = ?, arrivalDate = ?, arrivalTime = ?, numberSeats =?, airlineID = ?  WHERE flightNumber = ?""", (dept, dest, deptDate, deptTime, arrDate, arrTime, numSeats, airlineID, flightID))
         conn.commit()
         conn.close()
-        return redirect("/showFlight")
+        return redirect("/showFlight/{flightID}")
        
 
 
@@ -64,51 +64,47 @@ def removeFlight(flightID):
 #Booking
 #################################################
 @app.route("/addBooking")
-def addFlight():
+def addBooking():
     conn=getDbConnection()
     conn.close()
 
 @app.route("/showBooking/<int:bookingID>", methods = ["GET"])
-def showFlights(bookingID):
+def showBooking(bookingID):
     conn = getDbConnection()
     booking = conn.execute("Select * from Booking WHERE BookingID = ?", (bookingID,)).fetchone()
     conn.close()
-    return render_template("showFlight.html", booking = booking)
+    return render_template("showBooking.html", booking = booking)
 
-@app.route("/editFlight/<int:flightID>", methods=["GET", "POST"])
-def editFlight(flightID):
+@app.route("/editBooking/<int:bookingID>", methods=["GET", "POST"])
+def editBooking(bookingID):
     conn = getDbConnection()
 
     if request.method == "POST":
-        dept = request.form["Departure"]
-        dest = request.form["Destination"]
-        deptDate = request.form["Departure Date"]
-        deptTime = request.form["Departure Time"]
-        arrDate = request.form["Arrival Date"]
-        arrTime = request.form["Arrival Time"]
-        numSeats = request.form["Number of seats"]
-        airlineID = request.form["Airline ID"]
+        cardName = request.form["Credit Card Name"]
+        cardNum = request.form["Credit Card Number"]
+        cardCVV = request.form["CVV"]
+        cardExpiry = request.form["Expiry"]
 
-        conn.execute("""UPDATE Flight
-                     SET departure = ?, destination = ?, departureDate = ?, departureTime = ?, arrivalDate = ?, arrivalTime = ?, numberSeats =?, airlineID = ?  WHERE flightNumber = ?""", (dept, dest, deptDate, deptTime, arrDate, arrTime, numSeats, airlineID, flightID))
+        conn.execute("""UPDATE Booking
+                     SET creditCardName = ?, creditCardNumber = ?, creditCardCvv = ?, creditCardExpiry = ? WHERE bookingID = ?""", (cardName, cardNum, cardCVV, cardExpiry))
         conn.commit()
         conn.close()
-        return redirect("/showFlight")
-       
+        return redirect("/showBooking/{bookingID}")
 
-
-        # GET REQUEST FOR THE FORM
-    flight = conn.execute("SELECT * FROM Flight WHERE flightNumber =?", (flightID,)).fetchone()
+    # GET REQUEST FOR THE FORM
+    booking = conn.execute("SELECT * FROM Booking WHERE bookingID =?", (bookingID,)).fetchone()
     conn.close()
-    return render_template("editFlight.html", flight=flight)   
+    return render_template("editBooking.html", booking=booking)   
 
-@app.route("/deleteFlight/<int:flightID>", methods = ["POST"])
-def removeFlight(flightID):
+@app.route("/deleteBooking/<int:bookingID>", methods = ["POST"])
+def removeFlight(bookingID):
     conn = getDbConnection()
     conn.close()
 
-
+#This must be at end of file
 if __name__ == "__main__":
     app.run(debug=True)
 
-
+#############################################
+#Airline
+#############################################
