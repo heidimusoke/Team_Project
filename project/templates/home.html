@@ -8,9 +8,16 @@
 <body>
     <h1> Airplane Booking System</h1>
 
-    <button onclick="location.href='/addFlight'">Edit Flights(admin)</button>
+    <button onclick="location.href='/addFlight'">Add Flights(admin)</button>
     <button onclick="location.href='/showFlights'">Show Flights(admin)</button>
     <button onclick="location.href='/searchFlights'">Search Flight(admin)</button>
+    <button onclick="goToEdit()">Edit Flight(admin)</button>
+    <script>
+        function goToEdit(){
+            let id = prompt("Enter the flightID you want to edit")
+                location.href = "/editFlight/" + id;
+        }
+        </script>
 
     
 </body>

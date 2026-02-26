@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 import sqlite3
+from flask import jsonify
 #Important notes if conflused
 # app.route is the way to webpages which i put in templates folder as flask only reads templates (got an error so changed it to templates)
 #so far add is a work in progress show is there and search too will try booking soon
@@ -82,6 +83,109 @@ def searchFlights():
         conn.close()
 
     return render_template("searchFlights.html", flights=flights)
+
+#edit flight
+@app.route("/editFlight/<int:flightID>", methods=["GET", "POST"])
+def editFlight(flightID):
+    conn = getDbConnection()
+    f = conn.execute("SELECT * FROM Flight WHERE flightNumber =?", (flightID,)).fetchone()
+    if f is None:
+        conn.close()
+        return """
+<script>
+    alert('Flight ID does not exist');
+    window.history.back();
+</script>
+"""
+
+
+    if request.method == "POST":
+        dept = request.form["Departure"]
+        dest = request.form["Destination"]
+        deptDate = request.form["Departure Date"]
+        deptTime = request.form["Departure Time"]
+        arrDate = request.form["Arrival Date"]
+        arrTime = request.form["Arrival Time"]
+        numSeats = request.form["Number of seats"]
+        airlineID = request.form["Airline ID"]
+
+        conn.execute("""UPDATE Flight
+                     SET departure = ?, destination = ?, departureDate = ?, departureTime = ?, arrivalDate = ?, arrivalTime = ?, numberSeats =?, airlineID = ?  WHERE flightNumber = ?""", (dept, dest, deptDate, deptTime, arrDate, arrTime, numSeats, airlineID, flightID))
+        conn.commit()
+        conn.close()
+        return redirect(f"/showFlights")
+       
+
+
+    # GET REQUEST FOR THE FORM
+    flight = conn.execute("SELECT * FROM Flight WHERE flightNumber =?", (flightID,)).fetchone()
+    conn.close()
+    return render_template("editFlight.html", flight=flight)
+
+#delete flight
+@app.route("/deleteFlight/<int:flightID>", methods = ["POST"])
+def removeFlight(flightID):
+    conn = getDbConnection()
+    conn.close()
+
+#################################################
+#Booking
+#################################################
+@app.route("/addBooking")
+def addBooking():
+    conn=getDbConnection()
+    conn.close()
+
+@app.route("/showBooking/<int:bookingID>", methods = ["GET"])
+def showBooking(bookingID):
+    conn = getDbConnection()
+    conn.close()
+    return render_template("showBooking.html", booking = booking)
+
+@app.route("/editBooking/<int:bookingID>", methods=["GET", "POST"])
+def editBooking(bookingID):
+    conn = getDbConnection()
+
+    if request.method == "POST":
+        cardName = request.form["Credit Card Name"]
+        cardNum = request.form["Credit Card Number"]
+        cardCVV = request.form["CVV"]
+        cardExpiry = request.form["Expiry"]
+
+        conn.execute("""UPDATE Booking
+                     SET creditCardName = ?, creditCardNumber = ?, creditCardCvv = ?, creditCardExpiry = ? WHERE bookingID = ?""", (cardName, cardNum, cardCVV, cardExpiry))
+        conn.commit()
+        conn.close()
+        return redirect("/showBooking/{bookingID}")
+
+    # GET REQUEST FOR THE FORM
+    booking = conn.execute("SELECT * FROM Booking WHERE bookingID =?", (bookingID,)).fetchone()
+    conn.close()
+    return render_template("editBooking.html", booking=booking)   
+
+@app.route("/deleteBooking/<int:bookingID>", methods = ["POST"])
+def deleteBooking(bookingID):
+    conn = getDbConnection()
+    conn.close()
+
+#############################################
+#Airline
+#############################################
+
+
+#############################################
+#Admin
+#############################################
+
+
+#############################################
+#Customer
+##############################################
+
+
+#############################################
+#Seat
+#############################################
 
 
 if __name__ == "__main__":
