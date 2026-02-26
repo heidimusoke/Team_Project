@@ -93,12 +93,11 @@ def editFlight(flightID):
     if f is None:
         conn.close()
         return """
-<script>
-    alert('Flight ID does not exist');
-    window.history.back();
-</script>
-"""
-
+    <script>
+        alert('Flight ID does not exist');
+        window.history.back();
+    </script>
+    """
 
     if request.method == "POST":
         dept = request.form["Departure"]
@@ -149,7 +148,15 @@ def showBooking(bookingID):
 @app.route("/editBooking/<int:bookingID>", methods=["GET", "POST"])
 def editBooking(bookingID):
     conn = getDbConnection()
-
+    b = conn.execute("SELECT * FROM Flight WHERE flightNumber =?", (bookingID,)).fetchone()
+    if b is None:
+        conn.close()
+        return """
+<script>
+    alert('Booking ID does not exist');
+    window.history.back();
+</script>
+"""
     if request.method == "POST":
         cardName = request.form["Credit Card Name"]
         cardNum = request.form["Credit Card Number"]
@@ -177,8 +184,8 @@ def deleteBooking(bookingID):
 #Airline
 #############################################################
 #add airline
-@app.route("/addBooking")
-def addBooking():
+@app.route("/addAirline")
+def addAirline():
     conn=getDbConnection()
     conn.close()
 
@@ -186,32 +193,41 @@ def addBooking():
 @app.route("/showAirline/<int:airlineID>", methods = ["GET"])
 def showAirline(airlineID):
     conn = getDbConnection()
-    booking = conn.execute("""SELECT * FROM Airline WHERE airlineID = ?""", (airlineID,))
+    airline = conn.execute("""SELECT * FROM Airline WHERE airlineID = ?""", (airlineID,))
     conn.close()
-    return render_template("showAirline.html", booking = booking)
+    return render_template("showAirline.html", airline = airline)
 
 #edit airline
-@app.route("/editBooking/<int:bookingID>", methods=["GET", "POST"])
+@app.route("/editAirline/<int:airlineID>", methods=["GET", "POST"])
 def editAirline(airlineID):
     conn = getDbConnection()
+    a = conn.execute("SELECT * FROM Flight WHERE flightNumber =?", (airlineID,)).fetchone()
+    if a is None:
+        conn.close()
+        return """
+<script>
+    alert('airline ID does not exist');
+    window.history.back();
+</script>
+"""
 
     if request.method == "POST":
         airlineName = request.form["Airline Name"]
         airlineAddress = request.form["Airline Address"]
-        conn.execute("""UPDATE Booking
+        conn.execute("""UPDATE Airline
                      SET airlineName = ?, airlineAddress = ?, WHERE airlineID = ?""", (airlineName, airlineAddress))
         conn.commit()
         conn.close()
         return redirect(f"/showAirline/{airlineID}")
 
     # GET REQUEST FOR THE FORM
-    booking = conn.execute("SELECT * FROM Booking WHERE bookingID =?", (airlineID,)).fetchone()
+    airline = conn.execute("SELECT * FROM Airline WHERE airlineID =?", (airlineID,)).fetchone()
     conn.close()
-    return render_template("editBooking.html", booking=booking)   
+    return render_template("editAirline.html", airline=airline)   
 
 #delete airline
-@app.route("/deleteBooking/<int:bookingID>", methods = ["POST"])
-def deleteBooking(bookingID):
+@app.route("/deleteAirline/<int:airlineID>", methods = ["POST"])
+def deleteAirline(airlineID):
     conn = getDbConnection()
     conn.close()
 
