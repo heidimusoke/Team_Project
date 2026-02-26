@@ -200,8 +200,17 @@ def showAirline(airlineID):
 #edit airline
 @app.route("/editAirline/<int:airlineID>", methods=["GET", "POST"])
 def editAirline(airlineID):
+    if not airlineID.isdigit():
+        return """
+<script>
+    alert('You have input an invalid data type, please input an integer');
+    window.history.back();
+</script>
+"""
     conn = getDbConnection()
     a = conn.execute("SELECT * FROM Flight WHERE flightNumber =?", (airlineID,)).fetchone()
+    conn.close()
+
     if a is None:
         conn.close()
         return """
