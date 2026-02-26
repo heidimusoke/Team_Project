@@ -121,7 +121,7 @@ def editFlight(flightID):
     return render_template("editFlight.html", flight=flight)
 
 #delete flight
-@app.route("/deleteFlight/<int:flightID>", methods = ["POST"])
+@app.route("/deleteFlight/<int:flightID>", methods = ["GET", "POST"])
 def removeFlight(flightID):
     conn = getDbConnection()
     f = conn.execute("SELECT * FROM Flight WHERE flightNumber =?", (flightID,)).fetchone()
