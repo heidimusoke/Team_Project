@@ -10,33 +10,25 @@
 <body>
     <!--<h1> Airplane Booking System</h1>-->
 
-    <div class = "TopBar">
+    <div class = "topBar">
         <h1>
             TQHP AIR
         </h1>
     </div>
     
     <div class = "main">
-    <button onclick="login()">Login</button> 
+    <button id = "login" onclick="login()">Login</button> 
     <div id = "crudButtons">
-    <button onclick="location.href='/addFlight'">Add Flights(admin)</button>
-    <button onclick="location.href='/showFlights'">Show Flights</button>
-    <button onclick="location.href='/searchFlights'">Search Flight</button>
-    <button onclick="location.href=goToDelete()">Delete Flight</button>    
-      <script>
-        function goToDelete(){
-            let id = prompt("Enter the flightID you want to delete")
-                location.href = "/deleteFlight/" + id;
-        }
-        </script>
-
-
-    <button onclick="goToEdit()">Edit Flight(admin)</button>
+    <div>
+    <button onclick="location.href='/addFlight'">Add Flights(admin)</button></div>
+    <div><button onclick="location.href='/showFlights'">Show Flights</button></div>
+    <div><button onclick="location.href='/searchFlights'">Search Flight</button></div>
+    <div><button onclick="location.href=goToDelete()">Delete Flight</button></div>
+    <div><button onclick="goToEdit()">Edit Flight(admin)</button></div>
     </div>
-   
-        </div>
+    </div>
     <div class = bottomBar>
-
+        <h3>© 2026 TQHP AIR</h3>
         </div>
 
      <script>
@@ -47,9 +39,13 @@
 
         function login(){
             //Shows the buttons
-            document.getElementById("crudButtons").style.display("block");
+            document.getElementById("crudButtons").classList.toggle("show");
             //hides the login
-            document.getElementById("login").style.display("none");
+            document.getElementById("login").style.display="none";
+        }
+        function goToDelete(){
+            let id = prompt("Enter the flightID you want to delete")
+                location.href = "/deleteFlight/" + id;
         }
         </script> 
 </body>

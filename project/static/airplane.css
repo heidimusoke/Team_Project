@@ -1,0 +1,60 @@
+
+html, body{
+    height:100%;
+    margin: 0;
+    padding:0;
+}
+.topBar {
+    height: 15%;
+    text-align: center;
+    background: linear-gradient(180deg, #0A1A2F, #004AAD);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.main {
+    height: 70%;
+    text-align: center;
+    background: linear-gradient(180deg, #E8F8EF, #CFF3DD);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.bottomBar {
+    height: 15%;
+    text-align: center;
+    background: linear-gradient(180deg, #0A1A2F, #004AAD);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+#crudButtons {
+    display: none;            
+    flex-direction: column;   
+    gap: 20px;                
+    width: 100%;
+    align-items: center;      
+}
+
+
+#crudButtons.show {
+    display: flex;
+}
+
+
+button {
+    background: #004AAD;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    width: 250px;           
+    font-size: 16px;
+}
