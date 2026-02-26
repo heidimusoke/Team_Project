@@ -22,7 +22,15 @@
     <button onclick="location.href='/addFlight'">Add Flights(admin)</button>
     <button onclick="location.href='/showFlights'">Show Flights</button>
     <button onclick="location.href='/searchFlights'">Search Flight</button>
-    <button onclick="location.href='/deleteFlight'">Delete Flight(admin)</button>
+    <button onclick="location.href=goToDelete()">Delete Flight</button>    
+      <script>
+        function goToDelete(){
+            let id = prompt("Enter the flightID you want to delete")
+                location.href = "/deleteFlight/" + id;
+        }
+        </script>
+
+
     <button onclick="goToEdit()">Edit Flight(admin)</button>
     </div>
    
