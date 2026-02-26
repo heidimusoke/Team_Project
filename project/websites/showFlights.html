@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Flights</title>
+</head>
+<body>
+    <h2>All Flights</h2>
+    <table border="1">
+        <tr>
+            <th>Flight No</th>
+            <th>Departure</th>
+            <th>Destination</th>
+            <th>Date</th>
+            <th>Time</th>
+        
+
+        {% for flight in flights %}
+        <td>{{flight.flightNumber}}</td>
+        <td>{{flight.departure}}</td>
+        <td>{{flight.destination}}</td>
+        <td>{{flight.departureDate}}</td>
+        <td>{{flight.departureTime}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+    <br>
+    <button onclick="location.href='/'">Back Home</button>
+</body>
+</html>

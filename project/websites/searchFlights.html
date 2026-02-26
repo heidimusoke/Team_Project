@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search FLights</title>
+</head>
+<body>
+    <h2>Search Flights</h2>
+    <form method="POST">
+        Departure: <input type="text" name="departure" required>
+        Destination: <input type="text" name="destination" required>
+        <button type="submit">Search</button>
+    </form>
+
+    <br>
+
+    {% if flights %}
+    <h3>Results</h3>
+    <table border="1">
+        <tr>
+            <th>Flight No</th>
+            <th>Departure/th>
+            <th>Destination</th>
+            <th>Date</th>
+            <th>Time</th>
+        </tr>
+        {% for flight in flights %}
+        <tr>
+            <td>{{ flight.flightNumber }}</td>
+            <td>{{ flight.departure }}</td>
+            <td>{{ flight.destination }}</td>
+            <td>{{ flight.departureDate }}</td>
+            <td>{{ flight.departureTime }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endfor %}
+
+    <br>
+    <button onclick="location.href='/'">Back Home</button>
+</body>
+</html>
