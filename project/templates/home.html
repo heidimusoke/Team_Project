@@ -4,25 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flight Booking system</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='airplane.css') }}">
+
 </head>
 <body>
-    <h1> Airplane Booking System</h1>
+    <!--<h1> Airplane Booking System</h1>-->
 
+    <div class = "TopBar">
+        <h1>
+            TQHP AIR
+        </h1>
+    </div>
+    
+    <div class = "main">
+    <button onclick="login()">Login</button> 
+    <div id = "crudButtons">
     <button onclick="location.href='/addFlight'">Add Flights(admin)</button>
     <button onclick="location.href='/showFlights'">Show Flights</button>
     <button onclick="location.href='/searchFlights'">Search Flight</button>
     <button onclick="location.href='/deleteFlight'">Delete Flight(admin)</button>
-
-    
-
     <button onclick="goToEdit()">Edit Flight(admin)</button>
-    <script>
+    </div>
+   
+        </div>
+    <div class = bottomBar>
+
+        </div>
+
+     <script>
         function goToEdit(){
             let id = prompt("Enter the flightID you want to edit")
                 location.href = "/editFlight/" + id;
         }
-        </script>
 
-    
+        function login(){
+            //Shows the buttons
+            document.getElementById("crudButtons").style.display("block");
+            //hides the login
+            document.getElementById("login").style.display("none");
+        }
+        </script> 
 </body>
+
 </html>
