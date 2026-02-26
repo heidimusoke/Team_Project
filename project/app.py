@@ -131,17 +131,21 @@ def removeFlight(flightID):
 #################################################
 #Booking
 #################################################
+
+#add booking
 @app.route("/addBooking")
 def addBooking():
     conn=getDbConnection()
     conn.close()
 
+#show booking
 @app.route("/showBooking/<int:bookingID>", methods = ["GET"])
 def showBooking(bookingID):
     conn = getDbConnection()
     conn.close()
     return render_template("showBooking.html", booking = booking)
 
+#edit booking
 @app.route("/editBooking/<int:bookingID>", methods=["GET", "POST"])
 def editBooking(bookingID):
     conn = getDbConnection()
@@ -163,29 +167,12 @@ def editBooking(bookingID):
     conn.close()
     return render_template("editBooking.html", booking=booking)   
 
+#delete booking
 @app.route("/deleteBooking/<int:bookingID>", methods = ["POST"])
 def deleteBooking(bookingID):
     conn = getDbConnection()
     conn.close()
 
-#############################################
-#Airline
-#############################################
-
-
-#############################################
-#Admin
-#############################################
-
-
-#############################################
-#Customer
-##############################################
-
-
-#############################################
-#Seat
-#############################################
 
 
 if __name__ == "__main__":
