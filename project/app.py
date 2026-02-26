@@ -115,8 +115,6 @@ def editFlight(flightID):
         conn.commit()
         conn.close()
         return redirect(f"/showFlights")
-       
-
 
     # GET REQUEST FOR THE FORM
     flight = conn.execute("SELECT * FROM Flight WHERE flightNumber =?", (flightID,)).fetchone()
@@ -143,6 +141,7 @@ def addBooking():
 @app.route("/showBooking/<int:bookingID>", methods = ["GET"])
 def showBooking(bookingID):
     conn = getDbConnection()
+    booking = conn.execute("""SELECT * WHERE bookingID = ?""", (bookingID,))
     conn.close()
     return render_template("showBooking.html", booking = booking)
 
@@ -161,7 +160,7 @@ def editBooking(bookingID):
                      SET creditCardName = ?, creditCardNumber = ?, creditCardCvv = ?, creditCardExpiry = ? WHERE bookingID = ?""", (cardName, cardNum, cardCVV, cardExpiry))
         conn.commit()
         conn.close()
-        return redirect("/showBooking/{bookingID}")
+        return redirect(f"/showBooking/{bookingID}")
 
     # GET REQUEST FOR THE FORM
     booking = conn.execute("SELECT * FROM Booking WHERE bookingID =?", (bookingID,)).fetchone()
