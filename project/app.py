@@ -42,20 +42,21 @@ def addFlight():
         numberSeats = request.form["numberSeats"]
 
         conn = getDbConnection()
-        conn.execute("""
+        cur = conn.cursor()
+        cur.execute("""
             INSERT INTO Flight 
             (departure, destination, departureDate, departureTime, arrivalDate, arrivalTime, numberSeats)
             VALUES (?, ?, ?, ?, ?, ?, ?)
         """, (departure, destination, departureDate, departureTime, arrivalDate, arrivalTime, numberSeats))
 
-        flight_id = sqlite3.Cursor.lastrowid
+        flight_id = cur.lastrowid
         #for loop to make seats based on how many seats in flight
-        for i in range(1, numberSeats + 1):
+        for i in range(1, int(numberSeats) + 1):
             seat_number = f"S{i}"
             seat_cost = 100  # temp number we can change as we go on
 
-            conn.execute("""
-                INSERT INTO Seat (seatNumber, seatCost, bookingID, flightNumber)
+            cur.execute("""
+            INSERT INTO Seat (seatNumber, seatCost, bookingID, flightNumber)
                 VALUES (?, ?, NULL, ?)
             """, (seat_number, seat_cost, flight_id))
 
