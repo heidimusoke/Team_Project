@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Bookings</title>
+</head>
+<body>
+    <h2>Search Bookings</h2>
+    <form method="POST">
+        Flight ID: <input type="text" name="flightID" required>
+        Passenger Name: <input type="text" name="passengerName" required>
+        <button type="submit">Search</button>
+    </form>
+
+    <br>
+
+    {% if bookings %}
+    <h3>Results</h3>
+    <table border="1">
+        <tr>
+            <th>Booking ID</th>
+            <th>Flight ID</th>
+            <th>Passenger Name</th>
+            <th>Passenger Email</th>
+        </tr>
+
+        {% for booking in bookings %}
+        <tr>
+            <td>{{ booking.bookingID }}</td>
+            <td>{{ booking.flightID }}</td>
+            <td>{{ booking.passengerName }}</td>
+            <td>{{ booking.passengerEmail }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+    <br>
+    <button onclick="location.href='/'">Back Home</button>
+</body>
+</html>
