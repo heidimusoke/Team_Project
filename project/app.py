@@ -173,7 +173,47 @@ def deleteBooking(bookingID):
     conn = getDbConnection()
     conn.close()
 
+#############################################################
+#Airline
+#############################################################
+#add airline
+@app.route("/addBooking")
+def addBooking():
+    conn=getDbConnection()
+    conn.close()
 
+#show airline
+@app.route("/showAirline/<int:airlineID>", methods = ["GET"])
+def showAirline(airlineID):
+    conn = getDbConnection()
+    booking = conn.execute("""SELECT * FROM Airline WHERE airlineID = ?""", (airlineID,))
+    conn.close()
+    return render_template("showAirline.html", booking = booking)
+
+#edit airline
+@app.route("/editBooking/<int:bookingID>", methods=["GET", "POST"])
+def editAirline(airlineID):
+    conn = getDbConnection()
+
+    if request.method == "POST":
+        airlineName = request.form["Airline Name"]
+        airlineAddress = request.form["Airline Address"]
+        conn.execute("""UPDATE Booking
+                     SET airlineName = ?, airlineAddress = ?, WHERE airlineID = ?""", (airlineName, airlineAddress))
+        conn.commit()
+        conn.close()
+        return redirect(f"/showAirline/{airlineID}")
+
+    # GET REQUEST FOR THE FORM
+    booking = conn.execute("SELECT * FROM Booking WHERE bookingID =?", (airlineID,)).fetchone()
+    conn.close()
+    return render_template("editBooking.html", booking=booking)   
+
+#delete airline
+@app.route("/deleteBooking/<int:bookingID>", methods = ["POST"])
+def deleteBooking(bookingID):
+    conn = getDbConnection()
+    conn.close()
 
 if __name__ == "__main__":
     app.run(debug=True)
