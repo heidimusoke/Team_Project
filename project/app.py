@@ -1,6 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for
 import sqlite3
-
+#Important notes if conflused
+# app.route is the way to webpages which i put in templates folder as flask only reads templates (got an error so changed it to templates)
+#so far add is a work in progress show is there and search too will try booking soon
+#seats are generated now when we put numberSeats they are asigned to the flight id so that there is no overlapping seats on differnt flights
+#
 app = Flask(__name__)
 
 def getDbConnection():
@@ -42,6 +46,18 @@ def addFlight():
             (departure, destination, departureDate, departureTime, arrivalDate, arrivalTime, numberSeats)
             VALUES (?, ?, ?, ?, ?, ?, ?)
         """, (departure, destination, departureDate, departureTime, arrivalDate, arrivalTime, numberSeats))
+
+        flight_id = sqlite3.Cursor.lastrowid
+        #for loop to make seats based on how many seats in flight
+        for i in range(1, numberSeats + 1):
+            seat_number = f"S{i}"
+            seat_cost = 100  # temp number we can change as we go on
+
+            conn.execute("""
+                INSERT INTO Seat (seatNumber, seatCost, bookingID, flightNumber)
+                VALUES (?, ?, NULL, ?)
+            """, (seat_number, seat_cost, flight_id))
+
         conn.commit()
         conn.close()
 

@@ -20,11 +20,15 @@
     <table border="1">
         <tr>
             <th>Flight No</th>
-            <th>Departure/th>
+            <th>Departure</th>
             <th>Destination</th>
-            <th>Date</th>
-            <th>Time</th>
+            <th>Departure Date</th>
+            <th>Departure Time</th>
+            <th>Arrival Date</th>
+            <th>Arrival Time</th>
+            <th>Seats</th>
         </tr>
+
         {% for flight in flights %}
         <tr>
             <td>{{ flight.flightNumber }}</td>
@@ -32,10 +36,13 @@
             <td>{{ flight.destination }}</td>
             <td>{{ flight.departureDate }}</td>
             <td>{{ flight.departureTime }}</td>
+            <td>{{ flight.arrivalDate }}</td>
+            <td>{{ flight.arrivalTime }}</td>
+            <td>{{ flight.numberSeats }}</td>
         </tr>
         {% endfor %}
     </table>
-    {% endfor %}
+    {% endif %}
 
     <br>
     <button onclick="location.href='/'">Back Home</button>
