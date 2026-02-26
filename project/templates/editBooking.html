@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Flight</title>
+    <title>Edit Booking</title>
 </head>
 <body>
 
-    <h2>Edit Flight {{ flight['flightNumber'] }}</h2>
+    <h2>Edit Booking {{ booking['bookingID'] }}</h2>
 
     <form method="POST">
 
-        <input type="hidden" name="flightID" value="{{ flight['flightNumber'] }}">
+
+        <input type="hidden" name="bookingID" value="{{ booking['bookingID'] }}">
 
         Departure:
         <input type="text" name="Departure" value="{{ flight['departure'] }}" required><br><br>
