@@ -3,32 +3,68 @@ html, body{
     height:100%;
     margin: 0;
     padding:0;
+    width: 100%
+}
+body {
+    margin: 0;
+    height: 100vh;
+
+    background: 
+        linear-gradient(rgba(10, 26, 47, 0.6), rgba(0, 74, 173, 0.6)), 
+        url("/static/Images/Sunset.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 .topBar {
     height: 15%;
-    text-align: center;
-    background: linear-gradient(180deg, #0A1A2F, #004AAD);
     display: flex;
-    justify-content: center;
-    align-items: center;
+    align-items: center;        /* vertical alignment */
+    justify-content: center;/* or center if you prefer */
+    gap: 15px;
+    padding-left: 20px;
+    font-size: 25px;
+    background: linear-gradient(180deg, #0A1A2F, #004AAD);
     color: white;
+}
+#logo {
+    height: 100px;  
+    width: auto;
 }
 
 .main {
     height: 70%;
     text-align: center;
-    background: linear-gradient(180deg, #E8F8EF, #CFF3DD);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
 }
+.entry {
+    display: flex;                
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: black;
+    
+    color: white;
+
+    padding: 30px;
+    width: 500px;
+
+    border-radius: 15px;           
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);  
+
+    position: relative;
+}
+
 
 .bottomBar {
     height: 15%;
     text-align: center;
-    background: linear-gradient(180deg, #0A1A2F, #004AAD);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -57,4 +93,21 @@ button {
     border-radius: 6px;
     width: 250px;           
     font-size: 16px;
+}
+.button:hover {
+    transform: translateY(-5px);
+    transition: 0.3s;
+}
+
+
+input {
+    padding: 5px;
+    border-radius: 10px;
+    border: none;
+}
+.submit{
+
+}
+.back{
+
 }
