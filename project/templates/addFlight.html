@@ -3,17 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Flights</title>
+    <title>Flight Booking system</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='airplane.css') }}">
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!--<h1> Airplane Booking System</h1>-->
+
     <div class = "topBar">
-        <img id="sunset" src="{{ url_for('static', filename='Images/Sunset.jpg') }}">
+        <h1>
+             TQHP Bookings 
+            <img id="logo" src="{{ url_for('static', filename='Images/sunset logo.png') }}">
+        </h1>
     </div>
+    
     <div class = "main">
         <div class = "entry">
     <form method="POST">
+        <h2> Create a new Flight</h2>
         Departure: <input type="text" name="departure" required><br><br>
         Destination: <input type="text" name="destination" required><br><br>
         Departure Date: <input type="text" name="departureDate" required><br><br>
@@ -28,8 +35,10 @@
     </form>
     </div>
     </div>
+    <div class = bottomBar>
+        <h3>© 2026 TQHP AIR</h3>
+        </div>
 
-    <br>
 
     
 </body>
