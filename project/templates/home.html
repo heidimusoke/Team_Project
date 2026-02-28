@@ -18,14 +18,23 @@
     </div>
     
     <div class = "main">
-    <button id = "login" onclick="login()">Login</button> 
+    <button id = "login" onclick="login()">Login</button>
+
+    <div id = "inputDiv">
+        Enter flight id
+        <input name = "id" id = "flightInput" required> 
+        <button id = "Go"onclick = "goToAction(this)">Go</button>
+        <button id = "Delete"onclick = "goToAction(this)">Delete</button>
+        <button id = "back" onclick = "show()"> Back</button>
+    </div>
+
     <div id = "crudButtons">
     <div>
-    <button onclick="location.href='/addFlight'">Add Flights(admin)</button></div>
+    <button onclick="location.href='/addFlight'">Add Flights</button></div>
     <div><button onclick="location.href='/showFlights'">Show Flights</button></div>
     <div><button onclick="location.href='/searchFlights'">Search Flight</button></div>
-    <div><button onclick="location.href=goToDelete()">Delete Flight</button></div>
-    <div><button onclick="goToEdit()">Edit Flight(admin)</button></div>
+    <div><button id = "Delete Flight" onclick=hide(this)>Delete Flight</button></div>
+    <div><button id = "Edit Flight"onclick=hide(this)>Edit Flight</button></div>
     </div>
     </div>
     <div class = bottomBar>
@@ -33,10 +42,46 @@
         </div>
 
      <script>
-        function goToEdit(){
-            let id = prompt("Enter the flightID you want to edit")
-                location.href = "/editFlight/" + id;
+        //hide the crudButtons division
+        function hide(button){
+        document.getElementById("crudButtons").style.display = "none";
+        document.getElementById("inputDiv").style.display = "flex";
+        
+            if(button.id === "Edit Flight"){
+                document.getElementById("Go").style.display = "inlin-block";
+                document.getElementById("Delete").style.display = "none"
+            }
+            else if(button.id === "Delete Flight"){      
+                document.getElementById("Delete").style.display = "inline-block";
+                document.getElementById("Go").style.display = "none"
+            }
         }
+
+        function show(){//show the crudbuttons division
+            document.getElementById("inputDiv").style.display = "none";
+            document.getElementById("crudButtons").style.display = "flex";
+           
+        }
+
+function goToAction(button){
+
+    let id = document.getElementById("flightInput").value.trim();
+    let regex = /^\d+$/;
+    if(id === "" || !regex.test(id)){//checks to see if the id is valid input
+    alert("Please enter a valid numeric flight ID");
+        return;
+    }
+    //if structure checks for which button called the function
+    if(button.id === "Go"){
+
+        location.href = "/editFlight/" + id;
+    }
+    else if(button.id==="Delete"){
+        location.href = "/deleteFlight/" + id;
+    }
+    document.getElementById("flightInput").value = "";
+
+}
 
         function login(){
             //Shows the buttons
@@ -44,10 +89,7 @@
             //hides the login
             document.getElementById("login").style.display="none";
         }
-        function goToDelete(){
-            let id = prompt("Enter the flightID you want to delete")
-                location.href = "/deleteFlight/" + id;
-        }
+
         </script> 
 </body>
 

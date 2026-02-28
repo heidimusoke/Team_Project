@@ -3,10 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Show Flights</title>
+    <title>Edit Flight</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='airplane.css') }}">
 </head>
 <body>
-    <h2>All Flights</h2>
+        <div class = "topBar">
+        <h1>
+             TQHP Bookings 
+            <img id="logo" src="{{ url_for('static', filename='Images/sunset logo.png') }}">
+        </h1>
+        </div>
+    <div id = "main">
+   
+<div id = "display">
+     <h2>All Flights</h2>
 <table border="1">
     <tr>
         <th>Flight No</th>
@@ -33,7 +43,12 @@
     {% endfor %}
 </table>
     
-    <br>
     <button onclick="location.href='/'">Back Home</button>
+    </div>
+    
+    </div>
+    <div class = "bottomBar">
+        <h3>© 2026 TQHP AIR</h3>
+    </div>
 </body>
 </html>

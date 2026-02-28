@@ -25,10 +25,7 @@ html, body{
 }
 body {
     font-family: 'Travelnesia', sans-serif;
-    
-    /* full-page background */
     background: 
-        linear-gradient(rgba(10, 26, 47, 0.6), rgba(0, 74, 173, 0.6)), 
         url("/static/Images/Sunset.jpg");
     background-size: cover;
     background-position: center;
@@ -115,6 +112,7 @@ button {
   width: 210px;  
 }
 
+
 button:hover {
   background: #1a5fd1;         
   transform: scale(1.05);      
@@ -127,9 +125,46 @@ input {
     border-radius: 10px;
     border: none;
 }
-.submit{
 
+#inputDiv{
+    display: none;
+    background: rgba(0, 74, 173, 0.25);
+    backdrop-filter: blur(4px);
+    color: white;
+    padding: 30px;
+    width: 500px;
+    border-radius: 15px;           
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);  
+    position: relative;
+    gap:20px;
+    
 }
-.back{
+#inputDiv.show {
+    display: flex;
+}
+#inputDiv.none {
+    display: none;
+}
 
+#display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(0, 74, 173, 0.25);
+    backdrop-filter: blur(4px);
+    color: white;
+    padding: 30px;
+    width: 90%;
+    max-width: 1000px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    
+    /*important for placing it in center*/
+    margin: 50px auto; 
+}
+#display table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    text-align: center;
 }

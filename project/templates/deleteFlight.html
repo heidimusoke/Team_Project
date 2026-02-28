@@ -4,21 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Delete Flight</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='airplane.css') }}">
 </head>
 <body>
-
-    <h2>Delete Flight</h2>
-
+        <div class = "topBar">
+        <h1>
+             TQHP Bookings 
+            <img id="logo" src="{{ url_for('static', filename='Images/sunset logo.png') }}">
+        </h1>
+    </div>
+    <div class = "main">
+    <div class = "entry">
+    
     <form method="POST">
-
+        <h2>Delete Flight</h2>
         <!--This is to protect the flight id-->
         <input type="hidden" name="flightID" value="{{ flight['flightNumber'] }}">
         <p>Are you sure you want to delete this flight?</p>
         <button type="submit">Delete Flight</button>
+            <button type = "button" onclick="location.href='/'">Back</button>
     </form>
+    </div>
+</div>
+    <div class = "bottomBar">
+        <h3>© 2026 TQHP AIR</h3>
+    </div>
+    
 
-    <br>
-    <button onclick="location.href='/'">Back Home</button>
 
 </body>
 </html>
