@@ -5,11 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flight Booking system</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='userHome.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.js"></script>
 
 </head>
 <body>
+    <div id = "plain">
+        <button id = "Manage">Manage Booking</button>
+        <button id = "admin" onclick = "location.href = '/admin'">Admin</button>
+    </div>
+    <div id ="main">
+        <div id = "searchbar">
+            <form method="POST">
+                
+                <div id = "from">From:  <input list = "cities"id = "from" name="departure" class = "awesomplete"placeholder = "Origin" required></div>
+        
+                <div id = "to">To: <input list = "cities" id = "To" name="destination" class = "awesomplete"required placeholder = "Destination"></div>
+
+                <div id = "guest"> Passenger/Class: <input id = "pass/cl" type = "text" name ="pass/cl" required> </div>
+            
+                <button type="submit">Search</button>
+
+            </form>
+
+            <datalist id="cities">
+                <option value = "New York">
+                <option value= "Melbourne">
+                <option value = "Dublin">
+                <option value = "London">
+                <option value = "Manchester">
+                <option value = "Paris">
+                <option value = "Kingston">
+                <option value  = "Nairobi">
+                <option value="Mumbai">
+                <option value ="Johannesburg">
+                <option value = "Reykjavic">
+                <option value = "Manila">
+                <option value = "Madrid">
+            </datalist>
+        </div>
+        <div id = "content">
+
+        </div>
+    </div>
 
 </body>
 <script>
-    
+
 </script>

@@ -1,0 +1,84 @@
+html, body {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/*top image*/
+#plain {
+    height: 40vh; 
+    background: url("/static/Images/sunsetHome.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    text-align: right;
+    font-size: 35px;
+}
+#plain button{
+    background: transparent;
+    color: white;
+    font-size: 16px;
+    border:0px;
+    cursor: pointer;
+    transition: all 0.2s ease; 
+}
+#plain button:hover{
+   background-color: rgba(255, 255, 255, 0.2); 
+   text-decoration: underline;   
+}
+
+/*Search bar*/
+#searchbar {
+    display: flex;                
+    flex-direction: column;     
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: left;
+    background: #F2F0EF;
+    color: black;
+    padding: 30px;
+    width: 70%;
+    border-radius: 15px;           
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);  
+    position: relative;
+    margin: -40px auto 0 auto;
+    font-size: 20px;
+}
+
+#searchbar form {
+    display: flex;              /* makes the form children horizontal */
+    gap: 15px;                  /* space between inputs and button */
+    flex-wrap: wrap;            /* wrap on small screens */
+    justify-content: center;    /* center horizontally */
+    align-items: center;
+}
+
+#searchbar input{
+    border: 2px solid grey;
+    padding: 10px;
+    border-radius: 8px;   
+    font-size:15px;
+}
+#searchbar button{
+  background: #004AAD;
+  color: white;
+  padding: 15px 25px;
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: all 0.2s ease; 
+  width: 120px;  
+}
+
+
+
+#main {
+    flex: 1; 
+    background: linear-gradient(180deg, #0A1A2F, #004AAD);
+
+    display: flex;              /* make it a flex container */
+    justify-content: center;    /* horizontal centering */
+    align-items: flex-start;    /* keep it at the top */
+}
