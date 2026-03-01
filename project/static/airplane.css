@@ -95,11 +95,9 @@ body {
     align-items: center;      
 }
 
-
 #crudButtons.show {
     display: flex;
 }
-
 
 button {
   background: #004AAD;
