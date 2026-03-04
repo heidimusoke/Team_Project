@@ -44,32 +44,55 @@
         </div>
         <div id = "content">
             <div id="carousel">
+    <h1>Popular Destinations</h1>
 
-                <h1>Popular Destinations</h1>
+    <div id="carousel-track">
+        <img src="{{ url_for('static', filename='Images/Madrid.jpg') }}" class="slide">
+        <img src="{{ url_for('static', filename='Images/Nairobi.jpg') }}" class="slide">
+        <img src="{{ url_for('static', filename='Images/New York.jpg') }}" class="slide">
+        <img src="{{ url_for('static', filename='Images/Kampala.jpg') }}" class="slide">
+    </div>
 
-                <div id="carousel-images">
-                    <img src="{{ url_for('static', filename='Images/Madridd.jpg') }}"class="active">
-                    <img src="{{ url_for('static', filename='Images/Nairobi.jpg') }}">
-                    <img src="{{ url_for('static', filename='Images/New York.jpg') }}">
-                </div>
 
+</div>
+    <div id="carousel-controls">
+        <button id="prev">&#10094;</button>
 
-            </div>
-                <div id="carousel-controls">
-                    <button id="prev">&#10094;</button>
-
-                    <div id="dots">
-                        <span class="dot active-dot"></span>
-                        <span class="dot"></span>
-                        <span class="dot"></span>
-                    </div>
-
-                    <button id="next">&#10095;</button>
-                </div>
-            </div>
-
+        <div id="dots">
+            <span class="dot active-dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
         </div>
+
+        <button id="next">&#10095;</button>
+    </div>
+</div>
+
+</div>
+<div id = "bottom">
+    <div id = "About us" class = "footer">
+        <h2>About Us</h2> 
+        <p> We are dedicated to making travel simple, affordable, and inspiring. Our platform helps you explore destinations, compare flights, and plan your next adventure</p>
+    </div>
+    <div id = "Goal" class = "footer">
+        <p> Our mission is to connect people with the world by providing a seamless and enjoyable travel booking experience. We aim to make every journey smoother, from takeoff to landing. </p>
+    </div>
+    <div id = "contact"class="footer"> 
+        <h2>Contact</h2> 
+        <p>Email: support@travel.com</p> 
+        <p>Phone: +353 123 4567</p> 
+    </div>
+    <div id = "rights">
+        © 2026 TQHP Bookings. All rights reserved.
+    </div>
     
+
+</div>
+    
+
+
+
+
 <script>
 const cities = [
     "New York", "London", "Paris", "Tokyo",
@@ -98,34 +121,42 @@ document.getElementById("to").addEventListener("focus", function() {
     this.awesomplete.evaluate();
 });
 
-//for the images
-document.addEventListener("DOMContentLoaded", function() {
-    const images = document.querySelectorAll("#carousel-images img");
-    let current = 0;
+//for images
+const track = document.getElementById("carousel-track");
+const slides = document.querySelectorAll(".slide");
+const dots = document.querySelectorAll(".dot");
 
-    const showImage = (index) => {
-        images.forEach(img => img.classList.remove("active"));
-        images[index].classList.add("active");
+let index = 0;
+
+function updateCarousel() {
+    track.style.transform = `translateX(-${index * 60}%)`;
+
+    document.querySelector(".active")?.classList.remove("active");
+    slides[index].classList.add("active");
+
+    document.querySelector(".active-dot")?.classList.remove("active-dot");
+    dots[index].classList.add("active-dot");
+}
+
+document.getElementById("next").onclick = () => {
+    index = (index + 1) % slides.length;
+    updateCarousel();
+};
+
+document.getElementById("prev").onclick = () => {
+    index = (index - 1 + slides.length) % slides.length;
+    updateCarousel();
+};
+
+dots.forEach((dot, i) => {
+    dot.onclick = () => {
+        index = i;
+        updateCarousel();
     };
-
-    document.getElementById("next").addEventListener("click", () => {
-        current = (current + 1) % images.length;
-        showImage(current);
-    });
-
-    document.getElementById("prev").addEventListener("click", () => {
-        current = (current - 1 + images.length) % images.length;
-        showImage(current);
-    });
-
-    //Optional auto-slide every 8 seconds
-    setInterval(() => {
-        current = (current + 1) % images.length;
-        showImage(current);
-    }, 8000);
-
-    showImage(current);  //show first image
 });
+
+updateCarousel();
+
 </script>
 </body>
 </html>
