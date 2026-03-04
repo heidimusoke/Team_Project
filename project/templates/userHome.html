@@ -22,7 +22,14 @@
         
                 <div id = "to">To: <input list = "cities" id = "To" name="destination" class = "awesomplete"required placeholder = "Destination"></div>
 
-                <div id = "guest"> Passenger/Class: <input id = "pass/cl" type = "text" name ="pass/cl" required> </div>
+                <div id = "guest"> Passenger/Class: <label for="class"></label>
+
+                                <select name="class" id="class">
+                                            <option value="economy">Economy</option>
+                                                                <option value="premEco">Premium Economy</option>
+                                                                                    <option value="business">Business</option>
+                                                                                        <option value="first">First Class</option>
+                                                                                                </select> </div>
             
                 <button type="submit">Search</button>
 
