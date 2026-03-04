@@ -1,8 +1,25 @@
+@font-face {
+    font-family: 'KompotDisplay';
+    src: url('/static/fonts/kompot-display-demo.regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'KudryashevDisplay';
+    src: url('/static/fonts/kudryashev-display-regular.ttf') format('truetype');
+}
+
 html, body {
     margin: 0;
     height: auto;      /* let content dictate height */
     width: 100%;
 }
+h1, h2 { 
+    font-family: 'KompotDisplay', sans-serif;
+ }
+ p{
+    font-family: 'KudryashevDisplay', sans-serif;
+ }
 
 /*top image*/
 #plain {
