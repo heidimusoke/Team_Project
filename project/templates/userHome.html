@@ -25,18 +25,18 @@
         <div id = "searchbar">
             <form method="POST" action = "{{ url_for('searchFlights') }}">
                 
-                <div id = "fromdiv">From:  <input id = "from" name="departure" class = "awesomplete"placeholder = "Origin" required></div>
+            <div id = "fromdiv">From:  <input id = "from" name="departure" class = "awesomplete"placeholder = "Origin" required></div>
         
-                <div id = "todiv">To: <input  id = "to" name="destination" class = "awesomplete"required placeholder = "Destination"></div>
+            <div id = "todiv">To: <input  id = "to" name="destination" class = "awesomplete"required placeholder = "Destination"></div>
 
-                <div id = "guest"> Passenger/Class: <label for="class"></label>
+            <div id = "guest"> Passenger/Class: <label for="class"></label>
 
-                                <select name="class" id="class">
-                                            <option value="economy">Economy</option>
-                                                                <option value="premEco">Premium Economy</option>
-                                                                                    <option value="business">Business</option>
-                                                                                        <option value="first">First Class</option>
-                                                                                                </select> </div>
+            <select name="class" id="class">
+                <option value="economy">Economy</option>
+                <option value="premEco">Premium Economy</option>
+                <option value="business">Business</option>
+                <option value="first">First Class</option>
+            </select> </div>
             
                 <button type="submit">Search</button>
 
@@ -44,18 +44,32 @@
         </div>
         <div id = "content">
             <div id="carousel">
+
                 <h1>Popular Destinations</h1>
+
                 <div id="carousel-images">
-                    <img src="{{ url_for('static', filename='Images/Madridd.jpg') }}" class="active">
+                    <img src="{{ url_for('static', filename='Images/Madridd.jpg') }}"class="active">
                     <img src="{{ url_for('static', filename='Images/Nairobi.jpg') }}">
                     <img src="{{ url_for('static', filename='Images/New York.jpg') }}">
                 </div>
+
+
+            </div>
+                <div id="carousel-controls">
                     <button id="prev">&#10094;</button>
+
+                    <div id="dots">
+                        <span class="dot active-dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+
                     <button id="next">&#10095;</button>
+                </div>
             </div>
 
         </div>
-    </div>
+    
 <script>
 const cities = [
     "New York", "London", "Paris", "Tokyo",
@@ -104,13 +118,13 @@ document.addEventListener("DOMContentLoaded", function() {
         showImage(current);
     });
 
-    // Optional auto-slide every 8 seconds
+    //Optional auto-slide every 8 seconds
     setInterval(() => {
         current = (current + 1) % images.length;
         showImage(current);
     }, 8000);
 
-    showImage(current);  // show first image
+    showImage(current);  //show first image
 });
 </script>
 </body>
