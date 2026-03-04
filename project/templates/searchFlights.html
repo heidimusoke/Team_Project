@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search FLights</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='airplane.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='userHome.css') }}">
 </head>
 <body>
             <div class = "topBar">
@@ -15,19 +15,6 @@
     </div>
 
     <div class = "main">
-    <div class = "entry">
-    <form method="POST">
-         <h2>Search Flights</h2>
-        Departure: <input type="text" name="departure" required>
-        
-       <p> Destination: <input type="text" name="destination" required></p>
-    
-        <button type="submit">Search</button>
-        <button type = "button" onclick="location.href='/'">Back</button>
-    </form>
-    </div>
-    
-    
 
     {% if flights %}
     <h3>Results</h3>

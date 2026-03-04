@@ -10,46 +10,101 @@
 
 </head>
 <body>
-    <div id = "plain">
-        <button id = "Manage">Manage Booking</button>
-        <button id = "admin" onclick = "location.href = '/admin'">Admin</button>
+    <div id="plain">
+        <div class="header-content">
+            <h1>TQHP Bookings</h1>
+            <img id="logo" src="{{ url_for('static', filename='Images/sunset logo.png') }}">
+        </div>
+
+        <div class="plain-buttons">
+            <button id="Manage" onclick="location.href = '/editBooking.html'">Manage Booking</button>
+            <button id="admin" onclick="location.href = '/admin'">Admin</button>
+        </div>
     </div>
     <div id ="main">
         <div id = "searchbar">
-            <form method="POST">
+            <form method="POST" action = "{{ url_for('searchFlights') }}">
                 
-                <div id = "from">From:  <input list = "cities"id = "from" name="departure" class = "awesomplete"placeholder = "Origin" required></div>
+                <div id = "fromdiv">From:  <input id = "from" name="departure" class = "awesomplete"placeholder = "Origin" required></div>
         
-                <div id = "to">To: <input list = "cities" id = "To" name="destination" class = "awesomplete"required placeholder = "Destination"></div>
+                <div id = "todiv">To: <input  id = "to" name="destination" class = "awesomplete"required placeholder = "Destination"></div>
 
                 <div id = "guest"> Passenger/Class: <input id = "pass/cl" type = "text" name ="pass/cl" required> </div>
             
                 <button type="submit">Search</button>
 
             </form>
-
-            <datalist id="cities">
-                <option value = "New York">
-                <option value= "Melbourne">
-                <option value = "Dublin">
-                <option value = "London">
-                <option value = "Manchester">
-                <option value = "Paris">
-                <option value = "Kingston">
-                <option value  = "Nairobi">
-                <option value="Mumbai">
-                <option value ="Johannesburg">
-                <option value = "Reykjavic">
-                <option value = "Manila">
-                <option value = "Madrid">
-            </datalist>
         </div>
         <div id = "content">
+            <div id="carousel">
+                <h1>Popular Destinations</h1>
+                <div id="carousel-images">
+                    <img src="{{ url_for('static', filename='Images/Madridd.jpg') }}" class="active">
+                    <img src="{{ url_for('static', filename='Images/Nairobi.jpg') }}">
+                    <img src="{{ url_for('static', filename='Images/New York.jpg') }}">
+                </div>
+                    <button id="prev">&#10094;</button>
+                    <button id="next">&#10095;</button>
+            </div>
 
         </div>
     </div>
-
-</body>
 <script>
+const cities = [
+    "New York", "London", "Paris", "Tokyo",
+    "Sydney", "Berlin", "Dubai", "Toronto",
+    "Mumbai", "Cape Town", "Dublin"
+];
 
+// Initialize Awesomplete
+new Awesomplete(document.getElementById("from"), {
+    list: cities,
+    minChars: 0,      // show dropdown even if user hasn't typed
+    autoFirst: true
+});
+
+new Awesomplete(document.getElementById("to"), {
+    list: cities,
+    minChars: 0,
+    autoFirst: true
+});
+
+// Show dropdown on focus
+document.getElementById("from").addEventListener("focus", function() {
+    this.awesomplete.evaluate();
+});
+document.getElementById("to").addEventListener("focus", function() {
+    this.awesomplete.evaluate();
+});
+
+//for the images
+document.addEventListener("DOMContentLoaded", function() {
+    const images = document.querySelectorAll("#carousel-images img");
+    let current = 0;
+
+    const showImage = (index) => {
+        images.forEach(img => img.classList.remove("active"));
+        images[index].classList.add("active");
+    };
+
+    document.getElementById("next").addEventListener("click", () => {
+        current = (current + 1) % images.length;
+        showImage(current);
+    });
+
+    document.getElementById("prev").addEventListener("click", () => {
+        current = (current - 1 + images.length) % images.length;
+        showImage(current);
+    });
+
+    // Optional auto-slide every 8 seconds
+    setInterval(() => {
+        current = (current + 1) % images.length;
+        showImage(current);
+    }, 8000);
+
+    showImage(current);  // show first image
+});
 </script>
+</body>
+</html>

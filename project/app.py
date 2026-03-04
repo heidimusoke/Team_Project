@@ -17,7 +17,7 @@ def getDbConnection():
 # Customer Home Page
 @app.route("/")
 def userHome():
-    return render_template("userHome.html")
+        return render_template("userHome.html")
 
 # Admin Home Page
 @app.route("/admin")

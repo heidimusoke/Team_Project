@@ -1,9 +1,7 @@
 html, body {
     margin: 0;
-    height: 100%;
+    height: auto;      /* let content dictate height */
     width: 100%;
-    display: flex;
-    flex-direction: column;
 }
 
 /*top image*/
@@ -13,20 +11,46 @@ html, body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    text-align: right;
-    font-size: 35px;
+    padding: 20px;
 }
-#plain button{
+
+.header-content {
+    display: flex;                
+    align-items: center;          
+    justify-content: flex-start;   /* keep h1 on the left */
+    gap: 20px;                     /* space between h1 and logo */
+    margin: 60px auto 0 auto;
+}
+
+#plain h1 {
+    color: white;
+    font-size: 45px;
+    margin: 0;
+}
+
+#logo {
+    height: 100px;  
+    width: auto;
+}
+
+.plain-buttons {
+    margin-top: 20px;              /* separate from header */
+    text-align: right;             /* buttons aligned to right */
+    margin: -160px auto 0 auto;
+}
+
+.plain-buttons button {
     background: transparent;
     color: white;
     font-size: 16px;
-    border:0px;
+    border: 0px;
     cursor: pointer;
-    transition: all 0.2s ease; 
+    transition: all 0.2s ease;
 }
-#plain button:hover{
-   background-color: rgba(255, 255, 255, 0.2); 
-   text-decoration: underline;   
+
+.plain-buttons button:hover {
+    background-color: rgba(255, 255, 255, 0.2); 
+    text-decoration: underline;   
 }
 
 /*Search bar*/
@@ -43,7 +67,7 @@ html, body {
     border-radius: 15px;           
     box-shadow: 0 10px 25px rgba(0,0,0,0.2);  
     position: relative;
-    margin: -40px auto 0 auto;
+    margin: -80px auto 0 auto;
     font-size: 20px;
 }
 
@@ -70,15 +94,61 @@ html, body {
   cursor: pointer;
   transition: all 0.2s ease; 
   width: 120px;  
+  font-weight:bold;
+}
+#searchbar button:hover{
+  background: #1a5fd1;         
+  transform: scale(1.05); 
 }
 
 
-
 #main {
-    flex: 1; 
     background: linear-gradient(180deg, #0A1A2F, #004AAD);
+    display: flex;
+    flex-direction: column;   /* stack search bar and carousel vertically */
+    align-items: center;      /* center horizontally */
+    padding: 40px 0;          /* spacing from top */
+}
 
-    display: flex;              /* make it a flex container */
-    justify-content: center;    /* horizontal centering */
-    align-items: flex-start;    /* keep it at the top */
+
+#carousel {
+    position: relative;
+    width: 80%;
+    max-width: 800px;
+    margin: 50px auto;
+    overflow: hidden;
+    border-radius: 15px;
+    height:400px;
+    color:white;
+}
+
+#carousel-images img {
+    width: 70%;
+    display: none;
+    border-radius: 15px;
+    padding-left:80px;
+}
+
+#carousel-images img.active {
+    display: block;
+}
+
+#carousel button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.4);
+    color: white;
+    border: none;
+    font-size: 30px;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+#prev { 
+    left: 10px; 
+}
+#next { 
+    right: 10px; 
 }
