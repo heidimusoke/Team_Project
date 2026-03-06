@@ -15,15 +15,16 @@
         <div id = "main">
             <div id = "entry">
                 <h2>Your Booking</h2>
-                <button class = "backButton" type ="button" onclick="location.href='/'">&lt;Go Back</button>
-                <p><label>Booking id</label><br>
-                <p>e.g 1297</p>
-                <input id = "id" name = "id" placeholder = "Booking Id" required></p><br>
+                <p><label>Booking id</label><br>e.g 1297
                 
-                <label>Last Name</label>
-                <p><input id = "ln" name = "lastname" placeholder = "Last Name" required></p><br>
-
+                <br><input id = "id" name = "id" placeholder = "Booking Id" required></p><br>
+                
+                <p><label>Last Name</label>
+                <br><input id = "ln" name = "lastname" placeholder = "Last Name" required></p><br>
+                <div id = "buttondiv">
                 <button id = "search" onclick= "goToEdit()"> Search</button><br>
+                <button class = "backButton" type ="button" onclick="location.href='/'">&lt;Go Back</button>
+                </div>
             </div>
             <div id = "image">
                 <img src="{{ url_for('static', filename='Images/dusk plane.jpg') }}" alt="dusk">
