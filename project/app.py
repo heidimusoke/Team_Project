@@ -24,6 +24,10 @@ def userHome():
 def home():
     return render_template("home.html")
 
+# retrieve booking
+@app.route("/retrieveBooking")
+def retrieveBooking():
+    return render_template("retrieveBooking.html")
 
 # Show All Flights
 @app.route("/showFlights")
@@ -168,20 +172,20 @@ def addBooking():
 @app.route("/showBooking/<int:bookingID>", methods = ["GET"])
 def showBooking(bookingID):
     conn = getDbConnection()
-    booking = conn.execute("""SELECT * WHERE bookingID = ?""", (bookingID,))
+    booking = conn.execute("""SELECT * from Booking WHERE bookingID = ?""", (bookingID,))
     conn.close()
     return render_template("showBooking.html", booking = booking)
 
 #edit booking
-@app.route("/editBooking/<int:bookingID>", methods=["GET", "POST"])
-def editBooking(bookingID):
+@app.route("/editBooking/<int:bookingID>/<string:lastName>", methods=["GET", "POST"])
+def editBooking(bookingID, lastName):
     conn = getDbConnection()
-    b = conn.execute("SELECT * FROM Flight WHERE flightNumber =?", (bookingID,)).fetchone()
+    b = conn.execute("SELECT * FROM Booking inner join Customer on Booking.customerID = Customer.customerID where bookingID =? and  customerName= ?", (bookingID, lastName)).fetchone()
     if b is None:
         conn.close()
         return """
 <script>
-    alert('Booking ID does not exist');
+    alert('Booking does not exist');
     window.history.back();
 </script>
 """

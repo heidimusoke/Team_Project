@@ -16,10 +16,14 @@ html, body {
     overflow-x: hidden;
 }
 h1, h2 { 
-    font-family: 'KompotDisplay', sans-serif;
+    font-family: 'KudryashevDisplay', sans-serif;
  }
  p{
     font-family: 'KudryashevDisplay', sans-serif;
+ }
+ /*top bar*/
+ #bar{
+ background:#0A1A2F;
  }
 
 /*top image*/
@@ -118,7 +122,47 @@ h1, h2 {
   background: #1a5fd1;         
   transform: scale(1.05); 
 }
+.input-wrapper{
+    position:relative;
+}
 
+.results{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 300px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    list-style: none;
+    padding: 0;
+    margin-top: 4px;
+    max-height: 220px;
+    overflow-y: auto;
+    display: none;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    z-index: 9999;   
+}
+
+.results li{
+    padding:12px;
+    cursor:pointer;
+    border-bottom:1px solid #f1f1f1;
+    
+}
+
+.results li:hover{
+    background:#f5f7fa;
+}
+
+.airport-code{
+    font-weight:bold;
+    margin-right:8px;
+}
+
+.city-name{
+    color:#555;
+}
 
 #main {
     background:  #0A1A2F;

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="{{ url_for('static', filename='retrieveBooking.css') }}">    
+    <title>Retrieve Booking</title>
+</head>
+<body>
+    <div id ="top">
+         <h1>TQHP Bookings</h1>
+         <img id="logo" src="{{ url_for('static', filename='Images/sunset logo.png') }}">
+    </div>
+    
+        <div id = "main">
+            <div id = "entry">
+                <h2>Your Booking</h2>
+                <button class = "backButton" type ="button" onclick="location.href='/'">&lt;Go Back</button>
+                <p><label>Booking id</label><br>
+                <p>e.g 1297</p>
+                <input id = "id" name = "id" placeholder = "Booking Id" required></p><br>
+                
+                <label>Last Name</label>
+                <p><input id = "ln" name = "lastname" placeholder = "Last Name" required></p><br>
+
+                <button id = "search" onclick= "goToEdit()"> Search</button><br>
+            </div>
+            <div id = "image">
+                <img src="{{ url_for('static', filename='Images/dusk plane.jpg') }}" alt="dusk">
+            </div>
+        </div>
+    
+
+    </body>
+        <script>
+        function goToEdit(){
+            let id = document.getElementById("id").value.trim();
+            let ln = document.getElementById("ln").value.trim();
+            location.href = "/editBooking/" + id + "/" + ln;
+        }
+    </script>

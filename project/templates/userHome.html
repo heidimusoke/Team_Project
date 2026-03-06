@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flight Booking system</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='userHome.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.js"></script>
 
 </head>
 <body>
@@ -17,7 +15,7 @@
         </div>
 
         <div class="plain-buttons">
-            <button id="Manage" onclick="location.href = '/editBooking.html'">Manage Booking</button>
+            <button id="Manage" onclick="location.href = '/retrieveBooking'">Manage Booking</button>
             <button id="admin" onclick="location.href = '/admin'">Admin</button>
         </div>
     </div>
@@ -25,9 +23,21 @@
         <div id = "searchbar">
             <form method="POST" action = "{{ url_for('searchFlights') }}">
                 
-            <div id = "fromdiv">From:  <input id = "from" name="departure" class = "awesomplete"placeholder = "Origin" required></div>
-        
-            <div id = "todiv">To: <input  id = "to" name="destination" class = "awesomplete"required placeholder = "Destination"></div>
+                    <div id="fromdiv">
+            From:
+            <div class="input-wrapper">
+                <input id="from" name="departure" placeholder="Origin" autocomplete="off" required>
+                <ul id="from-results" class="results"></ul>
+            </div>
+        </div>
+
+        <div id="todiv">
+            To:
+            <div class="input-wrapper">
+                <input id="to" name="destination" placeholder="Destination" autocomplete="off" required>
+                <ul id="to-results" class="results"></ul>
+            </div>
+        </div>
 
             <div id = "guest"> Passenger/Class: <label for="class"></label>
 
@@ -94,32 +104,65 @@
 
 
 <script>
-const cities = [
-    "New York", "London", "Paris", "Tokyo",
-    "Sydney", "Berlin", "Dubai", "Toronto",
-    "Mumbai", "Cape Town", "Dublin"
+//list used for the airports
+const airports = [
+    {city:"Dublin", code:"DUB"},
+    {city:"London Heathrow", code:"LHR"},
+    {city:"Paris", code:"CDG"},
+    {city:"New York", code:"JFK"},
+    {city:"Tokyo", code:"NRT"},
+    {city:"Dubai", code:"DXB"},
+    {city:"Sydney", code:"SYD"},
+    {city:"Toronto", code:"YYZ"},
+    {city:"Berlin", code:"BER"},
+    {city:"Cape Town", code:"CPT"}
 ];
 
-// Initialize Awesomplete
-new Awesomplete(document.getElementById("from"), {
-    list: cities,
-    minChars: 0,      // show dropdown even if user hasn't typed
-    autoFirst: true
-});
+//Function to help with the dropdown
+function setupAirportSearch(inputId, resultsId){
+    const input = document.getElementById(inputId);//inputId represents the input box from where the input for the search is coming from 
+    const results = document.getElementById(resultsId);// the resultsId is the "list area" the dropdown will appear
 
-new Awesomplete(document.getElementById("to"), {
-    list: cities,
-    minChars: 0,
-    autoFirst: true
-});
+    function showResults(value="")
+    {
+        results.innerHTML = "";
 
-// Show dropdown on focus
-document.getElementById("from").addEventListener("focus", function() {
-    this.awesomplete.evaluate();
-});
-document.getElementById("to").addEventListener("focus", function() {
-    this.awesomplete.evaluate();
-});
+        const filtered = airports.filter(a =>
+            a.city.toLowerCase().includes(value.toLowerCase()) ||a.code.toLowerCase().includes(value.toLowerCase())
+        );
+
+        filtered.forEach(a => {
+
+            const li = document.createElement("li");// where the dropdown is now created with the results
+
+            li.innerHTML = `
+                <span class="airport-code">${a.code}</span>
+                <span class="city-name">${a.city}</span>
+            `;
+
+            li.onclick = () => {
+                input.value = a.city;
+                results.style.display = "none";
+            };
+
+            results.appendChild(li);
+        });
+
+        results.style.display = filtered.length ? "block" : "none";
+    }
+
+    input.addEventListener("focus", () => showResults());
+    input.addEventListener("input", () => showResults(input.value));
+
+    document.addEventListener("click", e=>{
+        if(!input.contains(e.target) && !results.contains(e.target)){
+            results.style.display="none";
+        }
+    });
+}
+
+setupAirportSearch("from","from-results");
+setupAirportSearch("to","to-results");
 
 //for images
 const track = document.getElementById("carousel-track");

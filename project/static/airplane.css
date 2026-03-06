@@ -6,16 +6,19 @@ html, body{
     width: 100%
 }
 
-@font-face
- { 
-    font-family: 'Travelnesia'; 
-    src: url('/static/fonts/Travelnesia DEMO.otf') format('opentype');
-    font-weight: normal; 
-    font-style: normal; 
+@font-face {
+    font-family: 'KompotDisplay';
+    src: url('/static/fonts/kompot-display-demo.regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'KudryashevDisplay';
+    src: url('/static/fonts/kudryashev-display-regular.ttf') format('truetype');
 }
 
 #homeBody{
-    font-family: 'Travelnesia', sans-serif;
+    font-family: 'KudryashevDisplay', sans-serif;
     background: url("/static/Images/Sunset.jpg");
     background-size: cover;
     background-position: center;
@@ -24,7 +27,7 @@ html, body{
     flex-direction: column;
 }
 body {
-    font-family: 'Travelnesia', sans-serif;
+    font-family: 'KudryashevDisplay', sans-serif;
     background: 
         url("/static/Images/Sunset.jpg");
     background-size: cover;
@@ -35,7 +38,7 @@ body {
     flex-direction: column;
 }
 .topBar {
-    font-family:'Travelnesia', sans-serif;
+    font-family:'KudryashevDisplay', sans-serif;
     height: 15%;
     display: flex;
     align-items: center;    
