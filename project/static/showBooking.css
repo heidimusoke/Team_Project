@@ -1,0 +1,207 @@
+@font-face {
+    font-family: 'KompotDisplay';
+    src: url('/static/fonts/kompot-display-demo.regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'KudryashevDisplay';
+    src: url('/static/fonts/kudryashev-display-regular.ttf') format('truetype');
+}
+
+html, body {
+    margin: 0;
+    height: auto;      
+    width: 100%;
+    font-family: 'KudryashevDisplay', sans-serif;
+    font-weight:bold;
+}
+#top{
+    background: #0A1A2F;
+    color: white;
+    font-size:16px;
+    display: flex;                
+    align-items: center;          
+    justify-content: flex-start; 
+    border-bottom: 3px solid white;
+    height:20%;
+}
+
+#logo {
+    height: 100px;  
+    width: auto;
+}
+#backButton{
+    align-self: flex-start;
+    margin-left: 20px;
+    
+}
+#backButton button{
+    background: transparent;
+    border: none;
+    color: white;         
+    font-size: 18px;
+    font-weight:bold;
+    font-family: 'KudryashevDisplay', sans-serif;
+    cursor: pointer;
+    padding: 10px 15px;
+    transition: all 0.2s ease;
+}
+#backButton button:hover{
+    color: #d0d0d0;
+    transform: translateX(-3px);
+    text-decoration: underline;
+}
+#main{
+    display: flex;                
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight:600px;
+    background: url("/static/Images/sunsetHome.jpg");
+}
+
+#info{
+    display: flex;                
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: white;
+    backdrop-filter: blur(4px);
+    color: black;
+    padding: 30px;
+    width: 700px;          
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);  
+    position: relative;
+    margin-top:60px;
+    margin-bottom:20px;
+}
+
+#info-header{
+    border-bottom: 2px solid grey;
+    width:100%;
+    padding-bottom:10px;
+}
+
+#info-summary{
+    margin-top:15px;
+    width:100%;
+    border-bottom: 2px solid grey;
+}
+#info-detailed-schedule{
+    display: flex;                
+    flex-direction: row;     
+ 
+}
+.details h3,
+.details h4 {
+    margin: -3px 0;
+}
+
+#divider{
+    width:100%;
+}
+
+#extra {
+    width: 700px;            
+    margin: 20px auto 0 auto;  
+    text-align: center;        
+}
+
+#extra-info {
+    text-align: left;
+}
+
+#extra button{
+    background:transparent;
+    border:0px;
+    font-size:20px;
+    width:700px;
+    text-align:left;
+    color:#0A1A2F;
+}
+#extra button:hover{
+  background:  rgb(188, 181, 181);         
+  transform: scale(1.02); 
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.booking-card {
+    width: 100%;
+    background: linear-gradient(135deg, #4a90e2, #6fb1fc);
+    border: none;
+    border-radius: 14px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+
+    color: white;
+    font-size: 1rem;
+    font-weight: 500;
+
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.booking-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.22);
+}
+
+.card-left img.ticket-icon {
+    width: 45px;
+    height: 45px;
+}
+
+.card-middle {
+    flex-grow: 1;
+    margin-left: 15px;
+    text-align: left;
+}
+
+.card-middle .code {
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: block;
+}
+
+.card-middle .name {
+    font-size: 0.95rem;
+    opacity: 0.9;
+    display: block;
+}
+
+.card-right .arrow {
+    font-size: 1.6rem;
+    font-weight: bold;
+    opacity: 0.9;
+    transition: transform 0.2s ease;
+}
+
+.booking-card:hover .arrow {
+    transform: translateX(4px);
+}
+
+
+.arrow{
+    font-size: 24px;
+}
+
+.bottom{
+    margin-top:60px;
+    background:#0A1A2F;
+    color: white;
+    height:100px;
+    display: flex;                
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+}
+
+

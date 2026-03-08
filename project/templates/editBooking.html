@@ -4,15 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Booking</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='editBooking.css') }}"> 
 </head>
 <body>
-    <div id ="top">
-        TQHP
-    </div>
-
-
-    <h2>Edit Booking {{ booking['bookingID'] }}</h2>
-<div id = "entry">
+ <div id = "entry">
     <form method="POST">
         
         <input type="hidden" name="bookingID" value="{{ booking['bookingID'] }}">
@@ -32,6 +27,6 @@
         <button type="submit">Save Changes</button>
         <button onclick="location.href='/'">Back Home</button>
     </form>
-    </div>
+    </div> 
 </body>
 </html>

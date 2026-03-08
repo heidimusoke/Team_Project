@@ -169,18 +169,40 @@ def addBooking():
     return render_template("addBooking.html")
 
 #show booking
-@app.route("/showBooking/<int:bookingID>", methods = ["GET"])
+@app.route("/showBooking/<int:bookingID>/", methods = ["GET"])
 def showBooking(bookingID):
     conn = getDbConnection()
-    booking = conn.execute("""SELECT * from Booking WHERE bookingID = ?""", (bookingID,))
+    booking = conn.execute("""
+        SELECT 
+            Booking.bookingID,
+            Booking.seatNumber,
+            Customer.customerName AS customerName,
+            Customer.customerEmail,
+            Flight.departure AS departure,
+            Flight.departureDate,
+            Flight.departureTime,
+            Flight.destination AS destination,
+            Flight.arrivalDate,
+            Flight.arrivalTime,
+            Airline.airlineName
+                
+        FROM Booking
+        INNER JOIN Customer ON Booking.customerID = Customer.customerID
+        INNER JOIN Flight ON Booking.flightNumber = Flight.flightNumber
+        INNER JOIN Airline ON Flight.airlineID = Airline.airlineID
+                           
+        WHERE Booking.bookingID = ?
+    """, (bookingID,)).fetchone()
     conn.close()
+    print("DEBUG: booking =", booking)
     return render_template("showBooking.html", booking = booking)
 
 #edit booking
-@app.route("/editBooking/<int:bookingID>/<string:lastName>", methods=["GET", "POST"])
-def editBooking(bookingID, lastName):
+@app.route("/editBooking/<int:bookingID>", methods=["GET", "POST"])
+def editBooking(bookingID):
     conn = getDbConnection()
-    b = conn.execute("SELECT * FROM Booking inner join Customer on Booking.customerID = Customer.customerID where bookingID =? and  customerName= ?", (bookingID, lastName)).fetchone()
+    b = conn.execute("""SELECT * from Booking WHERE bookingID = ?""", (bookingID,)).fetchone()
+
     if b is None:
         conn.close()
         return """
