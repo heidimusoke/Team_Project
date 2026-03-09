@@ -7,14 +7,14 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='searchFlights.css') }}">
 </head>
 <body>
-            <div class = "topBar">
-        <h1>
-             TQHP Bookings 
+          <div id="plain">
+        <div class="header-content">
+            <h1>TQHP Bookings</h1>
             <img id="logo" src="{{ url_for('static', filename='Images/sunset logo.png') }}">
-        </h1>
+        </div>
     </div>
 
-    <div class = "main">
+    <div id = "main">
     <div id = "display">
     {% if flights %}
     <h3>Results</h3>
@@ -50,8 +50,13 @@
     
     </div>
     
-        <div class = bottomBar>
-        <h3>© 2026 TQHP AIR</h3>
-        </div>
+        <div id = "bottom">
+    
+    <div id = "rights">
+        © 2026 TQHP Bookings. All rights reserved.
+    
+</div>
+
+</div>
 </body>
 </html>
