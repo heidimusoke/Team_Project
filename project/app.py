@@ -59,6 +59,7 @@ def addFlight():
         """, (departure, destination, departureDate, departureTime, arrivalDate, arrivalTime, numberSeats))
 
         flight_id = cur.lastrowid
+        cur.execute("DELETE FROM Seat WHERE flightNumber = ?", (flight_id,))
         #for loop to make seats based on how many seats in flight
         for i in range(1, int(numberSeats) + 1):
             seat_number = f"S{i}"
@@ -147,51 +148,91 @@ def removeFlight(flightID):
 #################################################
 #Booking
 #################################################
-
 #add booking
-@app.route("/addBooking", methods=["GET", "POST"])
+@app.route("/addBooking", methods=["POST"])
 def addBooking():
-    if request.method == "POST":
-        flightID = request.form["flightID"]
-        passengerName = request.form["passengerName"]
-        passengerEmail = request.form["passengerEmail"]
-        conn = getDbConnection()
-        cur = conn.cursor()
-        cur.execute("""
-            INSERT INTO Booking 
-            (flightID, passengerName, passengerEmail)
-            VALUES (?, ?, ?)
-        """, (flightID, passengerName, passengerEmail))
-        conn.commit()
-        conn.close()
-        return redirect("/showBooking")
+    flightID = request.form["flightID"]
+    seatID = request.form["seatID"]
 
-    return render_template("addBooking.html")
+    name = request.form["customerName"]
+    address = request.form["customerAddress"]
+    email = request.form["customerEmail"]
+    phone = request.form["customerPhoneNum"]
+
+    cardName = request.form["creditCardName"]
+    cardNumber = request.form["creditCardNumber"]
+    cardCvv = request.form["creditCardCvv"]
+    cardExpiry = request.form["creditCardExpiry"]
+
+    conn = getDbConnection()
+    cur = conn.cursor()
+
+    # Create customer
+    cur.execute("""
+    INSERT INTO Customer (customerName, customerAddress, customerEmail, customerPhoneNum)
+    VALUES (?, ?, ?, ?)
+    """, (name, address, email, phone))
+
+    customerID = cur.lastrowid
+
+    # Create booking
+    cur.execute("""
+    INSERT INTO Booking
+    (dateBooked, totalCost, creditCardName, creditCardNumber,
+     creditCardCvv, creditCardExpiry, customerID, flightNumber, seatID)
+    VALUES (DATE('now'), ?, ?, ?, ?, ?, ?, ?, ?)
+    """, (
+        100,
+        cardName,
+        cardNumber,
+        cardCvv,
+        cardExpiry,
+        customerID,
+        flightID,
+        seatID
+    ))
+
+    bookingID = cur.lastrowid
+
+    # Assign seat
+    cur.execute("""
+    UPDATE Seat
+    SET bookingID = ?
+    WHERE seatID = ?
+    """, (bookingID, seatID))
+
+    conn.commit()
+    conn.close()
+
+    return redirect(url_for("showBooking", bookingID=bookingID))
 
 #show booking
 @app.route("/showBooking/<int:bookingID>/", methods = ["GET"])
 def showBooking(bookingID):
     conn = getDbConnection()
     booking = conn.execute("""
-        SELECT 
-            Booking.bookingID,
-            Booking.seatNumber,
-            Customer.customerName AS customerName,
-            Customer.customerEmail,
-            Flight.departure AS departure,
-            Flight.departureDate,
-            Flight.departureTime,
-            Flight.destination AS destination,
-            Flight.arrivalDate,
-            Flight.arrivalTime,
-            Airline.airlineName
-                
-        FROM Booking
-        INNER JOIN Customer ON Booking.customerID = Customer.customerID
-        INNER JOIN Flight ON Booking.flightNumber = Flight.flightNumber
-        INNER JOIN Airline ON Flight.airlineID = Airline.airlineID
-                           
-        WHERE Booking.bookingID = ?
+    SELECT 
+        Booking.bookingID,
+        Seat.seatNumber,
+        Customer.customerName,
+        Customer.customerEmail,
+        Flight.departure,
+        Flight.departureDate,
+        Flight.departureTime,
+        Flight.destination,
+        Flight.arrivalDate,
+        Flight.arrivalTime,
+        Airline.airlineName
+
+    FROM Booking
+
+    LEFT JOIN Customer ON Booking.customerID = Customer.customerID
+    LEFT JOIN Flight ON Booking.flightNumber = Flight.flightNumber
+    LEFT JOIN Airline ON Flight.airlineID = Airline.airlineID
+    LEFT JOIN Seat ON Booking.seatID = Seat.seatID
+
+    WHERE Booking.bookingID = ?
+
     """, (bookingID,)).fetchone()
     conn.close()
     print("DEBUG: booking =", booking)
@@ -212,10 +253,10 @@ def editBooking(bookingID):
 </script>
 """
     if request.method == "POST":
-        cardName = request.form["Credit Card Name"]
-        cardNum = request.form["Credit Card Number"]
-        cardCVV = request.form["CVV"]
-        cardExpiry = request.form["Expiry"]
+        cardName = request.form["creditCardName"]
+        cardNum = request.form["creditCardNumber"]
+        cardCVV = request.form["creditCardCvv"]
+        cardExpiry = request.form["creditCardExpiry"]
 
         conn.execute("""UPDATE Booking
                      SET creditCardName = ?, creditCardNumber = ?, creditCardCvv = ?, creditCardExpiry = ? WHERE bookingID = ?""", (cardName, cardNum, cardCVV, cardExpiry))
@@ -284,7 +325,7 @@ def editAirline(airlineID):
 </script>
 """
     conn = getDbConnection()
-    a = conn.execute("SELECT * FROM Flight WHERE flightNumber =?", (airlineID,)).fetchone()
+    a = conn.execute("SELECT * FROM Airline WHERE airlineID = ?", (airlineID,)).fetchone()    
     conn.close()
 
     if a is None:
@@ -315,12 +356,28 @@ def editAirline(airlineID):
 @app.route("/deleteAirline/<int:airlineID>", methods = ["POST"])
 def deleteAirline(airlineID):
     conn = getDbConnection()
+    conn.execute("DELETE FROM Airline WHERE airlineID = ?", (airlineID,))
+    conn.commit()
     conn.close()
+    return redirect("/admin")
 
 ################################################################
 #Seat
 ################################################################
+@app.route("/selectSeat/<int:flightID>")
+def selectSeat(flightID):
 
+    conn = getDbConnection()
+
+    seats = conn.execute("""
+        SELECT seatID, seatNumber, bookingID
+        FROM Seat
+        WHERE flightNumber = ?
+    """, (flightID,)).fetchall()
+
+    conn.close()
+
+    return render_template("selectSeat.html", seats=seats, flightID=flightID)
 ################################################################
 #Customer
 ###############################################################

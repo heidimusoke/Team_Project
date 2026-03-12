@@ -7,118 +7,155 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='showBooking.css') }}"> 
 </head>
 <body>
-    
-    <div id ="top">
-         <h1>TQHP Bookings</h1>
-         <img id="logo" src="{{ url_for('static', filename='Images/sunset logo.png') }}">
-    </div>
-    <div id = "main">
-        <div id = "backButton"><button onclick="location.href='/retrieveBooking'">← Back Home</button></div>
-    <div id ="info">
-        <div id = "info-header"><p><h2>Flight details</h2>
-        <h3>View your flight details and itinerary</h3></p>
-        </div>
-        <form>
-        <div id = "info-summary">
-            
-            <h2>{{ booking['departure'] }} To {{ booking['destination'] }}</h2>
-            <p> Travel Date:{{ booking['departureDate'] }}</p>
-            
-        </div>
 
-        <div id = "info-detailed">
-            <div id = "airlinedetails"><h3>Operated By: {{ booking['airlineName'] }}</h3></div>
-            <div id = "info-detailed-schedule">
-                <div id = "departureDetails" class = "details">
-                    <h4>📅{{ booking['departureDate'] }}</h4>
-                    <h3>⏰{{ booking['departureTime'] }}</h3>
-                    <h4>{{ booking['departure'] }}</h4>
-
-                </div>
-                <div class = "divider">
-                    <br>
-                    
-                    ✈───────────✈
-                    <br>
-                    💺{{ booking['seatNumber'] }}
-
-                </div>
-                <div id = "arrivalDetails" class = "details">
-                    <h4>📅{{ booking['arrivalDate'] }}</h4>
-                    <h3>⏰{{ booking['arrivalTime'] }}</h3>
-                    <h4>{{ booking['destination'] }}</h4>
-                </div>
-            </div>
-        </div>
-        
+<div id="top">
+    <h1>TQHP Bookings</h1>
+    <img id="logo" src="{{ url_for('static', filename='Images/sunset logo.png') }}">
+</div>
 
 
-    </div>
+<div id="main">
 
-    </div>
-        <div id = "extra">
-        <div id = "extra-info">
-        <h2>Get ready for your trip</h2>
-        <p>Prepare all of your documents for a hassle-free trip. When applicable, enter any missing details and request assistance if needed.</p>
-            </form>
-        <h2>Manage my booking</h2>
-            <button id="bookingName" class="booking-card"
-                onclick="location.href='/editBooking/{{ booking['bookingID'] }}'">
-                <!-- Don't mind this, it may look like an error but it's not -->
-
-            <div class="card-left">
-                <img class="ticket-icon" src="{{ url_for('static', filename='Images/ticket.png') }}">
-            </div>
-
-            <div class="card-middle">
-                <span class="code">Booking code: {{ booking['bookingID'] }}</span>
-                <span class="name">Name: {{ booking['customerName'] }}</span>
-            </div>
-
-            <div class="card-right">
-                <span class="arrow">→</span>
-            </div>
-
-        </button>
-
-         
-        </div>
-    </div>
-    <div class = "bottom">
-        © 2026 TQHP Airlines <br>Contact | Help | Terms
-    </div>
-   
-
-    <!-- <form method="POST">
-        Flight ID: <input type="text" name="flightID" required>
-        Passenger Name: <input type="text" name="passengerName" required>
-        <button type="submit">Search</button>
-    </form> -->
-
-  
-
-    <!-- {% if bookings %}
-    <h3>Results</h3>
-    <table border="1">
-        <tr>
-            <th>Booking ID</th>
-            <th>Flight ID</th>
-            <th>Passenger Name</th>
-            <th>Passenger Email</th>
-        </tr>
-
-        {% for booking in bookings %}
-        <tr>
-            <td>{{ booking.bookingID }}</td>
-            <td>{{ booking.flightID }}</td>
-            <td>{{ booking.passengerName }}</td>
-            <td>{{ booking.passengerEmail }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-    {% endif %} -->
+<div id="backButton">
+<button onclick="location.href='/retrieveBooking'">
+← Back to Booking Search
+</button>
+</div>
 
 
+{% if booking %}
+
+<div id="info">
+
+<div id="info-header">
+
+<h2>Flight Details</h2>
+<h3>Booking Reference: {{ booking['bookingID'] }}</h3>
+
+</div>
+
+
+<div id="info-summary">
+
+<h2>{{ booking['departure'] }} → {{ booking['destination'] }}</h2>
+
+<p>Travel Date: {{ booking['departureDate'] }}</p>
+
+</div>
+
+
+<div id="info-detailed">
+
+<div id="airlinedetails">
+<h3>Operated By: {{ booking['airlineName'] }}</h3>
+</div>
+
+
+<div id="info-detailed-schedule">
+
+<div id="departureDetails" class="details">
+
+<h4>📅 {{ booking['departureDate'] }}</h4>
+<h3>⏰ {{ booking['departureTime'] }}</h3>
+<h4>{{ booking['departure'] }}</h4>
+
+</div>
+
+
+<div class="divider">
+
+✈───────────✈
+<br>
+💺 Seat: {{ booking['seatNumber'] }}
+
+</div>
+
+
+<div id="arrivalDetails" class="details">
+
+<h4>📅 {{ booking['arrivalDate'] }}</h4>
+<h3>⏰ {{ booking['arrivalTime'] }}</h3>
+<h4>{{ booking['destination'] }}</h4>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div id="extra">
+
+<div id="extra-info">
+
+<h2>Get ready for your trip</h2>
+
+<p>
+Prepare your travel documents before departure.
+If needed you can edit your booking details below.
+</p>
+
+
+<h2>Manage my booking</h2>
+
+
+<a href="/editBooking/{{ booking['bookingID'] }}" id="bookingName" class="booking-card">
+
+<div class="card-left">
+<img class="ticket-icon"
+src="{{ url_for('static', filename='Images/ticket.png') }}">
+</div>
+
+
+<div class="card-middle">
+
+<span class="code">
+Booking code: {{ booking['bookingID'] }}
+</span>
+
+<span class="name">
+Name: {{ booking['customerName'] }}
+</span>
+
+</div>
+
+
+<div class="card-right">
+<span class="arrow">→</span>
+</div>
+
+</a>
+
+
+</div>
+
+</div>
+
+
+{% else %}
+
+<h2 style="text-align:center;margin-top:50px;">
+Booking not found
+</h2>
+
+{% endif %}
+
+
+</div>
+
+
+<div class="bottom">
+
+© 2026 TQHP Airlines
+<br>
+Contact | Help | Terms
+
+</div>
+
+
+</body>
 </body>
 
 </html>

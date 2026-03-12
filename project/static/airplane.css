@@ -169,3 +169,52 @@ input {
     margin-bottom: 20px;
     text-align: center;
 }
+
+
+.seat-container {
+    background: rgba(255,255,255,0.9);
+    width: 1400px;
+    margin: 40px auto;
+    padding: 30px;
+    border-radius: 12px;
+}
+
+.seat-container input {
+    padding: 10px;
+    margin: 10px;
+    width: 200px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.seat-container button {
+    padding: 12px 20px;
+    background: #1b5fc6;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.seat-container table {
+    margin-bottom: 25px;
+}
+
+td:nth-child(3) {
+    padding-right: 30px;
+}
+
+td:nth-child(4) {
+    padding-left: 30px;
+}
+td {
+    padding: 6px;
+}
+
+td button {
+    width: 150px;
+    height: 45px;
+}
+table {
+    margin: auto;
+}

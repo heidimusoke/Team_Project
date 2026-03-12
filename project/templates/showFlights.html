@@ -39,11 +39,16 @@
         <td>{{ flight.arrivalDate }}</td>
         <td>{{ flight.arrivalTime }}</td>
         <td>{{ flight.numberSeats }}</td>
+        <td>
+            <a href="/selectSeat/{{ flight.flightNumber }}">
+                <button>Book</button>
+            </a>
+        </td>
     </tr>
     {% endfor %}
 </table>
-    
-    <button onclick="location.href='/admin'">Back Home</button>
+
+    <button onclick="location.href='/'">Back Home</button>
     </div>
     
     </div>

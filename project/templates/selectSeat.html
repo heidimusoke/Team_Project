@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seat Selection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='airplane.css') }}">
+</head>
+<script>
+function selectSeat(seatID){
+    document.getElementById("seatID").value = seatID;
+}
+
+function checkSeat(){
+    const seat = document.getElementById("seatID").value;
+    if(seat === ""){
+        alert("Please select a seat first.");
+        return false;
+    }
+    return true;
+}
+function selectSeat(seatID){
+    document.getElementById("seatID").value = seatID;
+    alert("Seat selected");
+}
+</script>
+<body>
+         <h1>Select Seat</h1>
+<div class="seat-container">
+<table border="1">
+
+<tr>
+{% for seat in seats %}
+
+<td>
+
+{% if seat.bookingID == None %}
+
+<button type="button" onclick="selectSeat('{{ seat.seatID }}')">
+{{ seat.seatNumber }}
+</button>
+
+{% else %}
+
+<button disabled style="background-color: grey;">
+{{ seat.seatNumber }}
+</button>
+
+{% endif %}
+
+</td>
+
+{% if loop.index % 6 == 0 %}
+</tr><tr>
+{% endif %}
+
+{% endfor %}
+</tr>
+</table>
+<form method="POST" action="/addBooking">
+
+<input type="hidden" name="flightID" value="{{ flightID }}">
+<input type="hidden" id="seatID" name="seatID">
+
+<h3>Passenger Details</h3>
+
+Name:
+<input type="text" name="customerName" required>
+
+Address:
+<input type="text" name="customerAddress" required>
+
+Email:
+<input type="email" name="customerEmail" required>
+
+Phone:
+<input type="text" name="customerPhoneNum" required>
+
+<h3>Payment Details</h3>
+
+Card Name:
+<input type="text" name="creditCardName" required>
+
+Card Number:
+<input type="text" name="creditCardNumber" required>
+
+CVV:
+<input type="text" name="creditCardCvv" required>
+
+Expiry:
+<input type="text" name="creditCardExpiry" placeholder="MM/YY" required>
+
+<button type="submit" onclick="return checkSeat()">Confirm Booking (€100)</button>
+
+</form>
+</div>
+</body>
+</html>
