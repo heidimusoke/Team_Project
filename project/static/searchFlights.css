@@ -162,6 +162,19 @@ body {
     display: flex;
 }
 
+.homeButton {
+  background: #004AAD;
+  color: white;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 6px;
+  position: relative;
+  left: 45%;
+  cursor: pointer;
+  transition: all 0.2s ease; 
+  width: 210px;  
+}
+
 button {
   background: #004AAD;
   color: white;
@@ -172,7 +185,6 @@ button {
   transition: all 0.2s ease; 
   width: 210px;  
 }
-
 
 button:hover {
   background: #1a5fd1;         
