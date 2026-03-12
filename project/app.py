@@ -24,6 +24,11 @@ def userHome():
 def home():
     return render_template("home.html")
 
+# Admin login page
+@app.route("/login")
+def adminLogin():
+    return render_template("adminLogin.html")
+
 # retrieve booking
 @app.route("/retrieveBooking")
 def retrieveBooking():
@@ -36,6 +41,8 @@ def showFlights():
     flights = conn.execute("SELECT * FROM Flight").fetchall()
     conn.close()
     return render_template("showFlights.html", flights=flights)
+
+
 
 
 # Add Flight (Admin later)

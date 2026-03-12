@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Booking system</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='airplane.css') }}">
+
+</head>
+<body id = "homeBody">
+    <!--<h1> Airplane Booking System</h1>-->
+
+    <div class = "topBar">
+        <h1>
+                   TQHP Bookings 
+    <img id="logo" src="{{ url_for('static', filename='Images/sunset logo.png') }}">
+        </h1>
+    </div>
+    
+    <div class = "main">
+        <div id = "loginSection">
+            <div id = "loginInput">
+                <div id = "email">
+                    <label>Email</label>
+                    <input id = "email"> 
+                    <label>Password</label>
+                    <input id = "password"> 
+                    <button id = "login" onclick="login()">Login</button>
+                </div>
+            </div>
+        </div>
+</div>
+    <div class = bottomBar>
+        <h3>© 2026 TQHP AIR</h3>
+        </div>
+</body>
