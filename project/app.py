@@ -291,6 +291,25 @@ def deleteBooking(bookingID):
         conn.close()
         return render_template("home.html")
 
+
+#add baggage  (not done yet, i do more on weekend)
+#app.route("/addBagge/<text:customerName>/", methods=["GET", "POST"])
+#def addBaggage(customerName):
+#  conn = getDbConnection()
+#   b = conn.execute("""SELECT * from Booking WHERE cusomerName = ?""", (cusomerName,)).fetchone()
+
+#   if b is None:
+#       conn.close()
+#       return 
+#       """
+#       <script>
+#           alert('Booking does not exist');
+#           window.history.back();
+#       </script>
+#       """
+
+
+
 #############################################################
 #Airline
 #############################################################
