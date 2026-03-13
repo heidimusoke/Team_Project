@@ -24,10 +24,15 @@ def userHome():
 def home():
     return render_template("home.html")
 
-# Admin login page
-@app.route("/login")
-def adminLogin():
+@app.route("/adminLogin", methods = ["GET"])
+def showAdminLogin():
     return render_template("adminLogin.html")
+
+
+# Admin login page
+# @app.route("/login")
+# def adminLogin():
+#     return render_template("adminLogin.html")
 
 # retrieve booking
 @app.route("/retrieveBooking")
@@ -407,6 +412,44 @@ def selectSeat(flightID):
 ################################################################
 #Customer
 ###############################################################
+
+
+
+###############################################################
+#Admin
+##############################################################
+
+@app.route("/adminLogin", methods=["POST"])
+def adminLogin():
+    conn = getDbConnection()
+
+    username = request.form["username"]
+    password = request.form["password"]
+
+    a = conn.execute(
+        "SELECT * FROM AdminTable WHERE username = ?",(username,)).fetchone()
+
+    if a is None:
+        conn.close()
+        return """
+        <script>
+            alert('Incorrect login details');
+            window.history.back();
+        </script>
+        """
+
+    stored_password = a["password"]
+    if stored_password != password:
+        conn.close()
+        return """
+        <script>
+            alert('Incorrect login details');
+            window.history.back();
+        </script>
+        """
+
+    conn.close()
+    return render_template("home.html")
 
 
 

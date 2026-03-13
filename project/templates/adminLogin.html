@@ -3,34 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flight Booking system</title>
+    <title>Flight Booking System</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='airplane.css') }}">
-
 </head>
-<body id = "homeBody">
-    <!--<h1> Airplane Booking System</h1>-->
 
-    <div class = "topBar">
+<body id="homeBody">
+
+    <div class="topBar">
         <h1>
-                   TQHP Bookings 
-    <img id="logo" src="{{ url_for('static', filename='Images/sunset logo.png') }}">
+            TQHP Bookings
+            <img id="logo" src="{{ url_for('static', filename='Images/sunset logo.png') }}">
         </h1>
     </div>
-    
-    <div class = "main">
-        <div id = "loginSection">
-            <div id = "loginInput">
-                <div id = "email">
-                    <label>Email</label>
-                    <input id = "email"> 
-                    <label>Password</label>
-                    <input id = "password"> 
-                    <button id = "login" onclick="login()">Login</button>
+
+    <div class="main">
+        <div id="loginSection">
+            <div id="loginInput">
+                <div id="email">
+
+                    <form action="/adminLogin" method="POST">
+
+                        <label>Email</label>
+                        <input id="username" name="username" type="text" required>
+
+                        <label>Password</label>
+                        <input id="password" name="password" type="password" required>
+
+                        <button id="login" type="submit">Login</button>
+
+                    </form>
+
                 </div>
             </div>
         </div>
-</div>
-    <div class = bottomBar>
+    </div>
+
+    <div class="bottomBar">
         <h3>© 2026 TQHP AIR</h3>
-        </div>
+    </div>
+
 </body>
+</html>
