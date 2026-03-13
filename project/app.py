@@ -427,7 +427,7 @@ def adminLogin():
     password = request.form["password"]
 
     a = conn.execute(
-        "SELECT * FROM AdminTable WHERE username = ?",(username,)).fetchone()
+        "SELECT * FROM Admin WHERE username = ?",(username,)).fetchone()
 
     if a is None:
         conn.close()
