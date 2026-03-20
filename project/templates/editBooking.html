@@ -14,18 +14,23 @@
 
     <input type="hidden" name="bookingID" value="{{ booking['bookingID'] }}">
 
-    <label>Credit Card Name</label>
+    <label>Name</label>
     <input type="text" name="creditCardName" value="{{ booking['creditCardName'] }}"required>
+    <h4>Call the service team to change your name</h4>
 
-    <label>Credit Card Number</label>
+    <label>Email</label>
     <input type="text" name="creditCardNumber"value="{{ booking['creditCardNumber'] }}"required>
 
-    <label>CVV</label>
+    <label>Phone Number</label>
     <input type="text" name="creditCardCvv" value="{{ booking['creditCardCvv'] }}" required>
 
-    <label>Expiry</label>
+    <label>Change Seat</label>
     <input type="text" name="creditCardExpiry" value="{{ booking['creditCardExpiry'] }}" required>
+    
+    <label>Bagge Options</label>
 
+    <label>Cancel Booking</label>
+    
     <br>
 
 <button type="submit">Save Changes</button>

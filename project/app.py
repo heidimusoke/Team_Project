@@ -247,6 +247,14 @@ def showBooking(bookingID):
 
     """, (bookingID,)).fetchone()
     conn.close()
+    if booking is None:
+        conn.close()
+        return """
+                    <script>
+                        alert('Booking does not exist');
+                        window.history.back();
+                    </script>
+                    """
     print("DEBUG: booking =", booking)
     return render_template("showBooking.html", booking = booking)
 
