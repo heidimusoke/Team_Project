@@ -28,7 +28,9 @@ def home():
 def showAdminLogin():
     return render_template("adminLogin.html")
 
-
+@app.route("/deletionConfirmed")
+def deletionConfirmed():
+    return render_template("deletionConfirmed.html")
 # Admin login page
 # @app.route("/login")
 # def adminLogin():
@@ -298,12 +300,16 @@ def deleteBooking(bookingID):
         conn.close()
         return
     else:
-        conn.execute("""Delete FROM Booking
-                     WHERE bookingID = ?""", (bookingID,))
-        conn.commit()
+        if request.method == "POST":
+            conn.execute("""Delete FROM Booking
+                        WHERE bookingID = ?""", (bookingID,))
+            conn.commit()
+            conn.close()
+            return render_template("deletionConfirmed.html", booking = booking)
+    
+        #GET method
         conn.close()
-        return render_template("deleteBooking.html", booking = booking)
-
+        return render_template("deleteBooking.html", booking=booking)
 
 #add baggage  (not done yet, i do more on weekend)
 #app.route("/addBagge/<text:customerName>/", methods=["GET", "POST"])

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Deleted</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='deleteBooking.css') }}">
+</head>
+
+<body>
+
+    <div class="top">
+        <div class="logo">Airline Booking System</div>
+        <nav class="nav-links">
+            <a href="/">Home</a>
+            <a href="/viewBookings">My Bookings</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <h2>Booking Deleted</h2>
+
+            <p>Your booking has been successfully removed from the system.</p>
+
+            <button class="btn-secondary" onclick="location.href='/'">
+                Back to Home
+            </button>
+        </div>
+    </div>
+
+    <div class="bottom">
+        © 2026 TQHP Airlines
+        <br>
+        Contact | Help | Terms
+    </div>
+
+</body>
+</html>
