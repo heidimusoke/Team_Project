@@ -262,39 +262,39 @@ def showBooking(bookingID):
 @app.route("/editBooking/<int:bookingID>", methods=["GET", "POST"])
 def editBooking(bookingID):
     conn = getDbConnection()
-    b = conn.execute("""SELECT * from Booking WHERE bookingID = ?""", (bookingID,)).fetchone()
+    b = conn.execute("""SELECT * from Booking INNER JOIN Customer ON Booking.customerID = Customer.customerID INNER JOIN Seat on Booking.seatID = Seat.seatID WHERE Booking.bookingID = ?""", (bookingID,)).fetchone()
+    #getting customer id
+    custId = conn.execute("""SELECT customerID FROM Booking WHERE Booking.bookingID = ?""", (bookingID,)).fetchone()[0]
 
     if b is None:
         conn.close()
-        return """
-<script>
-    alert('Booking does not exist');
-    window.history.back();
-</script>
-"""
+        return """<script>
+        alert('Booking does not exist');
+        window.history.back();
+        </script>"""
+    
     if request.method == "POST":
-        cardName = request.form["creditCardName"]
-        cardNum = request.form["creditCardNumber"]
-        cardCVV = request.form["creditCardCvv"]
-        cardExpiry = request.form["creditCardExpiry"]
+        email = request.form["customerEmail"]
+        phone = request.form["customerPhoneNum"]
+        seat = request.form["seatNumber"]
 
-        conn.execute("""UPDATE Booking
-                     SET creditCardName = ?, creditCardNumber = ?, creditCardCvv = ?, creditCardExpiry = ? WHERE bookingID = ?""", (cardName, cardNum, cardCVV, cardExpiry))
+        conn.execute("""UPDATE Customer
+                     SET customerEmail = ?, customerPhoneNum = ? WHERE customerID = ?""", (email, phone, custId))
         conn.commit()
         conn.close()
         return redirect(f"/showBooking/{bookingID}")
 
     # GET REQUEST FOR THE FORM
-    booking = conn.execute("SELECT * FROM Booking WHERE bookingID =?", (bookingID,)).fetchone()
+    booking = conn.execute("SELECT * FROM Booking INNER JOIN Customer ON Booking.customerID = Customer.customerID INNER JOIN Seat ON Booking.seatID = Seat.seatID WHERE Booking.bookingID =?", (bookingID,)).fetchone()
     conn.close()
     return render_template("editBooking.html", booking=booking)   
 
 #delete booking
-@app.route("/deleteBooking/<int:bookingID>", methods = ["POST"])
+@app.route("/deleteBooking/<int:bookingID>", methods = ["GET","POST"])
 def deleteBooking(bookingID):
     conn = getDbConnection()
-    f = conn.execute("SELECT * FROM Booking WHERE bookingID =?", (bookingID,)).fetchone()
-    if f is None:
+    booking = conn.execute("SELECT * FROM Booking WHERE bookingID =?", (bookingID,)).fetchone()
+    if booking is None:
         conn.close()
         return
     else:
@@ -302,7 +302,7 @@ def deleteBooking(bookingID):
                      WHERE bookingID = ?""", (bookingID,))
         conn.commit()
         conn.close()
-        return render_template("home.html")
+        return render_template("deleteBooking.html", booking = booking)
 
 
 #add baggage  (not done yet, i do more on weekend)

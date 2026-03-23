@@ -1,0 +1,147 @@
+@font-face {
+    font-family: 'KudryashevDisplay';
+    src: url('/static/fonts/kudryashev-display-regular.ttf') format('truetype');
+}
+
+html, body {
+    margin: 0;
+    width: 100%;
+    font-family: 'KudryashevDisplay', sans-serif;
+    background: #F3F4F6;
+}
+
+
+#top {
+    background: #0A1A2F;
+    color: white;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border-bottom: 3px solid white;
+    height: 20%;
+}
+
+#logo {
+    height: 100px;
+    width: auto;
+}
+
+
+#main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+
+#backButton {
+    align-self: flex-start;
+    margin-left: 20px;
+}
+
+#backButton button {
+    background: transparent;
+    border: none;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 10px 15px;
+    transition: 0.2s ease;
+}
+
+#backButton button:hover {
+    transform: translateX(-3px);
+    text-decoration: underline grey;
+}
+
+
+#info {
+    background: white;
+    padding: 40px;
+    width: 700px;
+    max-width: 90%;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    margin-top: 30px;
+}
+
+
+.Entries {
+    font-size: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+#info input {
+    font-size: 18px;
+    padding: 10px 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    margin-top: 5px;
+    transition: 0.2s ease;
+}
+
+#info input:focus {
+    border-color: #0A1A2F;
+    outline: none;
+}
+
+
+#subtle-text {
+    font-style: italic;
+    font-size: 14px;
+    color: darkgrey;
+    margin-top: 5px;
+}
+
+
+.Buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.Buttons button {
+    padding: 12px 20px;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    transition: 0.2s ease;
+}
+
+.cancel {
+    background: #b30000;
+    color: white;
+}
+
+.cancel:hover {
+    background: #8a0000;
+}
+
+.save {
+    background: #0A1A2F;
+    color: white;
+}
+
+.save:hover {
+    background: grey;
+}
+
+.bottom {
+    margin-top: 60px;
+    background: #0A1A2F;
+    color: white;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    font-weight:600px;
+}

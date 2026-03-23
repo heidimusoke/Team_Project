@@ -8,39 +8,60 @@
 </head>
 <body>
 
-<div id="entry">
+<div id="top">
+    <h1>TQHP Bookings</h1>
+    <img id="logo" src="{{ url_for('static', filename='Images/sunset logo.png') }}">
+</div>
 
-    <form method="POST">
+<div id="main">
 
-    <input type="hidden" name="bookingID" value="{{ booking['bookingID'] }}">
+    <div id="backButton">
+        <button onclick="location.href='/retrieveBooking'">← Back to Booking Search</button>
+    </div>
 
-    <label>Name</label>
-    <input type="text" name="creditCardName" value="{{ booking['creditCardName'] }}"required>
-    <h4>Call the service team to change your name</h4>
+    <div id="info">
+        <form method="POST">
 
-    <label>Email</label>
-    <input type="text" name="creditCardNumber"value="{{ booking['creditCardNumber'] }}"required>
+            <input type="hidden" name="bookingID" value="{{ booking['bookingID'] }}">
 
-    <label>Phone Number</label>
-    <input type="text" name="creditCardCvv" value="{{ booking['creditCardCvv'] }}" required>
+            <div class="Entries">
+                <label>Name</label>
+                <input type="text" name="customerName" value="{{ booking['customerName'] }}" readonly>
+                <div id="subtle-text">Call the service team to change your name</div>
+            </div>
 
-    <label>Change Seat</label>
-    <input type="text" name="creditCardExpiry" value="{{ booking['creditCardExpiry'] }}" required>
-    
-    <label>Bagge Options</label>
+            <div class="Entries">
+                <label>Email</label>
+                <input type="text" name="customerEmail" value="{{ booking['customerEmail'] }}" required>
+            </div>
 
-    <label>Cancel Booking</label>
-    
+            <div class="Entries">
+                <label>Phone Number</label>
+                <input type="text" name="customerPhoneNum" value="{{ booking['customerPhoneNum'] }}" required>
+            </div>
+
+            <div class="Entries">
+                <label>Change Seat</label>
+                <input type="text" name="seatNumber" value="{{ booking['seatNumber'] }}" required>
+            </div>
+
+            <div class="Entries">
+                <label>Bagge Options</label>
+            </div>
+
+            <div class="Buttons">
+                <button class="cancel" type = "button" onclick="location.href='/deleteBooking/{{ booking['bookingID'] }}'">Cancel Booking</button>
+                <button class="save" type="submit">Save Changes</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div class="bottom">
+    © 2026 TQHP Airlines
     <br>
-
-<button type="submit">Save Changes</button>
-
-<button type="button" onclick="location.href='/'">
-Back 
-</button>
-
-</form>
-
+    Contact | Help | Terms
 </div>
 
 </body>
