@@ -7,14 +7,13 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='airplane.css') }}">
 
 </head>
-<body id = "homeBody">
+<body>
     <!--<h1> Airplane Booking System</h1>-->
 
     <div class = "topBar">
         <h1>
-                   TQHP Bookings 
+                   TQHP Bookings </h1>
     <img id="logo" src="{{ url_for('static', filename='Images/sunset logo.png') }}">
-        </h1>
     </div>
     
     <div class = "main">
@@ -30,15 +29,18 @@
     <div id = "crudButtons">
     <div>
     <button onclick="location.href='/addFlight'">Add Flights</button></div>
+
     <div><button onclick="location.href='/showFlights'">Show Flights</button></div>
+
     <div><button onclick="location.href='/searchFlights'">Search Flight</button></div>
+
     <div><button id = "Delete Flight" onclick=hide(this)>Delete Flight</button></div>
+
     <div><button id = "Edit Flight"onclick=hide(this)>Edit Flight</button></div>
+    
     </div>
     </div>
-    <div class = bottomBar>
-        <h3>© 2026 TQHP AIR</h3>
-        </div>
+
 
      <script>
         //hide the crudButtons division

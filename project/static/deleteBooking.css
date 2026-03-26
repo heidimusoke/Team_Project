@@ -29,18 +29,6 @@ body {
     width: auto;
 }
 
-.nav-links a {
-    color: white;
-    text-decoration: none;
-    margin-left: 25px;
-    font-size: 16px;
-    transition: 0.2s;
-}
-
-.nav-links a:hover {
-    opacity: 0.7;
-}
-
 
 .container {
     flex: 1;
