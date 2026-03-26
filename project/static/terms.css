@@ -1,28 +1,37 @@
-/* GLOBAL LAYOUT */
+@font-face {
+    font-family: 'KudryashevDisplay';
+    src: url('/static/fonts/kudryashev-display-regular.ttf') format('truetype');
+}
+
+html, body {
+    margin: 0;
+    width: 100%;
+    font-family: 'KudryashevDisplay', sans-serif;
+   }
+
 body {
     margin: 0;
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background: #f5f3ef; /* warm beige */
+    background: #f5f3ef; 
     color: #4a4a4a;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
-/* TOP BAR */
-.topbar {
-    background: #0A1A2F; /* deep navy */
+#top {
+    background: #0A1A2F;
     color: white;
-    padding: 18px 40px;
+    font-size: 16px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: flex-start;
+    border-bottom: 3px solid white;
+    height: 20%;
 }
 
-.topbar .logo {
-    font-size: 22px;
-    font-weight: bold;
-    letter-spacing: 0.5px;
+#logo {
+    height: 100px;
+    width: auto;
 }
 
 .nav-links a {
@@ -37,7 +46,7 @@ body {
     opacity: 0.7;
 }
 
-/* MAIN CONTENT */
+
 .container {
     flex: 1;
     display: flex;
@@ -73,7 +82,7 @@ p {
     line-height: 1.6;
 }
 
-/* BUTTON */
+
 .btn-primary {
     background: #0A1A2F;
     color: white;
@@ -93,7 +102,7 @@ p {
     transform: scale(1.02);
 }
 
-/* FOOTER */
+
 .footer {
     background: #0A1A2F;
     color: white;

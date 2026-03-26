@@ -10,18 +10,14 @@
 
 <body>
 
-    <!-- TOP BAR -->
-    <header class="topbar">
-        <div class="logo">Airline Booking System</div>
-        <nav class="nav-links">
-            <a href="/">Home</a>
-            <a href="/viewBookings">My Bookings</a>
-        </nav>
-    </header>
+    <div id="top">
+        <h1>TQHP Bookings</h1>
+        <img id="logo" src="{{ url_for('static', filename='Images/sunset logo.png') }}">
+    </div>
 
-    <!-- MAIN CONTENT -->
-    <main class="container">
-        <section class="card">
+   
+    <div class="container">
+        <div class="card">
             <h2>Terms & Conditions</h2>
 
             <p>Welcome to the Airline Booking System. By accessing or using this website, you agree to the following terms and conditions. Please read them carefully.</p>
@@ -48,13 +44,12 @@
             <p>By continuing to use this website, you acknowledge that you have read and agreed to these terms and conditions.</p>
 
             <button class="btn-primary" onclick="location.href='/'">Back to Home</button>
-        </section>
-    </main>
+        </div>
+    </div>
 
-    <!-- FOOTER -->
-    <footer class="footer">
-        © 2024 Airline Booking System — All Rights Reserved
-    </footer>
+    <div class="footer">
+        © 2026 TQHP Bookings. All rights reserved.
+    </div>
 
 </body>
 </html>
