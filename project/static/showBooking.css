@@ -203,4 +203,28 @@ html, body {
 
 }
 
+#buttons button {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 8px 14px;
+    transition: opacity 0.2s ease;
+}
+
+#buttons button:hover {
+    opacity: 0.7;
+}
+
+#buttons button:focus {
+    outline: none;
+}
+
+.divider {
+    color: white;
+    opacity: 0.5;
+    margin: 0 6px;
+}
+
 

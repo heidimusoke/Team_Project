@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms & Conditions</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='terms.css') }}">
+</head>
+
+<body>
+
+    <!-- TOP BAR -->
+    <header class="topbar">
+        <div class="logo">Airline Booking System</div>
+        <nav class="nav-links">
+            <a href="/">Home</a>
+            <a href="/viewBookings">My Bookings</a>
+        </nav>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="container">
+        <section class="card">
+            <h2>Terms & Conditions</h2>
+
+            <p>Welcome to the Airline Booking System. By accessing or using this website, you agree to the following terms and conditions. Please read them carefully.</p>
+
+            <h3>1. Use of the Website</h3>
+            <p>This platform is provided for the purpose of viewing, creating, and managing flight bookings. You agree not to misuse the system or attempt to interfere with its functionality.</p>
+
+            <h3>2. Booking Information</h3>
+            <p>All booking details entered into the system must be accurate and truthful. The system is not responsible for errors caused by incorrect user input.</p>
+
+            <h3>3. Cancellations & Modifications</h3>
+            <p>Users may modify or cancel bookings according to the options available within the system. Once a booking is deleted, it cannot be recovered.</p>
+
+            <h3>4. Data Privacy</h3>
+            <p>Your information is used solely for booking management within this system. No personal data is shared with third parties.</p>
+
+            <h3>5. System Availability</h3>
+            <p>We aim to keep the platform available at all times, but occasional maintenance or technical issues may cause temporary downtime.</p>
+
+            <h3>6. Limitation of Liability</h3>
+            <p>The Airline Booking System is provided for educational and demonstration purposes. We are not liable for any damages arising from the use of this platform.</p>
+
+            <h3>7. Acceptance of Terms</h3>
+            <p>By continuing to use this website, you acknowledge that you have read and agreed to these terms and conditions.</p>
+
+            <button class="btn-primary" onclick="location.href='/'">Back to Home</button>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        © 2024 Airline Booking System — All Rights Reserved
+    </footer>
+
+</body>
+</html>

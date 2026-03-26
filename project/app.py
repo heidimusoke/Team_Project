@@ -40,6 +40,10 @@ def deletionConfirmed():
 @app.route("/retrieveBooking")
 def retrieveBooking():
     return render_template("retrieveBooking.html")
+# show terms page
+@app.route("/terms")
+def showTerms():
+    return render_template("terms.html")
 
 # Show All Flights
 @app.route("/showFlights")

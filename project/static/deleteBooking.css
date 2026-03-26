@@ -1,4 +1,8 @@
-/* GLOBAL LAYOUT */
+@font-face {
+    font-family: 'KudryashevDisplay';
+    src: url('/static/fonts/kudryashev-display-regular.ttf') format('truetype');
+}
+
 body {
     margin: 0;
     font-family: 'Segoe UI', Arial, sans-serif;
@@ -37,7 +41,7 @@ body {
     opacity: 0.7;
 }
 
-/* MAIN CONTENT */
+
 .container {
     flex: 1;
     display: flex;
@@ -117,4 +121,28 @@ p {
     text-align: center;
     width: 100%;
     font-weight:600px;
+}
+
+#buttons button {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 8px 14px;
+    transition: opacity 0.2s ease;
+}
+
+#buttons button:hover {
+    opacity: 0.7;
+}
+
+#buttons button:focus {
+    outline: none;
+}
+
+.divider {
+    color: white;
+    opacity: 0.5;
+    margin: 0 6px;
 }
