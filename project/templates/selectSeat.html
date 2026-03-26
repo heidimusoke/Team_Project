@@ -6,24 +6,7 @@
     <title>Seat Selection</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='airplane.css') }}">
 </head>
-<script>
-function selectSeat(seatID){
-    document.getElementById("seatID").value = seatID;
-}
 
-function checkSeat(){
-    const seat = document.getElementById("seatID").value;
-    if(seat === ""){
-        alert("Please select a seat first.");
-        return false;
-    }
-    return true;
-}
-function selectSeat(seatID){
-    document.getElementById("seatID").value = seatID;
-    alert("Seat selected");
-}
-</script>
 <body>
 
 
@@ -61,7 +44,7 @@ function selectSeat(seatID){
 {% endfor %}
 </tr>
 </table>
-<form method="POST" action="/addBooking">
+<form id = "paymentForm"method="POST" action="/addBooking">
 
 <input type="hidden" name="flightID" value="{{ flightID }}">
 <input type="hidden" id="seatID" name="seatID">
@@ -78,25 +61,95 @@ Email:
 <input type="email" name="customerEmail" required>
 
 Phone:
-<input type="text" name="customerPhoneNum" required>
+<input type="text" name="customerPhoneNum" minlength = "10" maxlength = "10"required>
 
 <h3>Payment Details</h3>
 
 Card Name:
-<input type="text" name="creditCardName" required>
+<input type="text" id = "creditCardName"  name="creditCardName" required>
 
 Card Number:
-<input type="text" name="creditCardNumber" required>
+<input type="text" id="creditCardNumber"name="creditCardNumber" minlength = "16" maxlength = "16" required>
 
 CVV:
-<input type="text" name="creditCardCvv" required>
+<input type="text" id="creditCardCvv"name="creditCardCvv" minlength = "3"maxlength = "3" required>
 
 Expiry:
-<input type="text" name="creditCardExpiry" placeholder="MM/YY" required>
+<input type="text" id ="creditCardExpiry" name="creditCardExpiry" placeholder="MM/YY" required>
 
 <button type="submit" onclick="return checkSeat()">Confirm Booking (€100)</button>
 
 </form>
+<div id = "errordiv"></div>
 </div>
+
 </body>
+
 </html>
+
+<script>
+    document.getElementById("paymentForm").addEventListener("submit", function(e) {
+    e.preventDefault(); //This prevents the form from being submitted
+
+    let errors = [];
+
+    const name = document.getElementById("creditCardName").value.trim();
+    if (!/^[A-Za-z ]+$/.test(name) || name.length < 3) {
+        errors.push("Please enter a valid cardholder name.");
+    }
+
+
+    const number = document.getElementById("creditCardNumber").value.trim();
+    if (!/^[0-9]{16}$/.test(number)) {
+        errors.push("Card number must be 16 digits.");
+    }
+
+    const expiry = document.getElementById("creditCardExpiry").value.trim();
+    if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(expiry)) {
+        errors.push("Expiry date must be in MM/YY format.");
+    } else {
+        const [month, year] = expiry.split("/");
+        const now = new Date();
+        const expDate = new Date(`20${year}`, month);
+
+        if (expDate < now) {
+            errors.push("Your card has expired.");
+        }
+    }
+
+
+    const cvv = document.getElementById("creditCardCvv").value.trim();
+    if (!/^[0-9]{3}$/.test(cvv)) {
+        errors.push("CVV must be 3 digits.");
+    }
+
+    //edit division to show error
+    const errorBox = document.getElementById("errordiv");
+    if (errors.length > 0) {
+        errorBox.innerHTML = errors.join("<br>");
+        errorBox.style.display = "block";
+        errorBox.style.color = "red";
+    } else {
+        errorBox.style.display = "none";
+        this.submit(); //submitting our form
+    }
+});
+
+function selectSeat(seatID){
+    document.getElementById("seatID").value = seatID;
+}
+
+function checkSeat(){
+    const seat = document.getElementById("seatID").value;
+    if(seat === ""){
+        alert("Please select a seat first.");
+        return false;
+    }
+    return true;
+}
+function selectSeat(seatID){
+    document.getElementById("seatID").value = seatID;
+    alert("Seat selected");
+}
+</script>
+

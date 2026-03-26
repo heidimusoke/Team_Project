@@ -23,7 +23,7 @@
         <div id = "searchbar">
             <form method="POST" action = "{{ url_for('searchFlights') }}">
                 
-                    <div id="fromdiv">
+            <div id="fromdiv">
             From:
             <div class="input-wrapper">
                 <input id="from" name="departure" placeholder="Origin" autocomplete="off" required>
@@ -120,7 +120,9 @@ const airports = [
     {city:"Toronto", code:"YYZ"},
     {city:"Berlin", code:"BER"},
     {city:"Cape Town", code:"CPT"},
-    {city:"Istanbul", code: "IST"}
+    {city:"Istanbul", code: "IST"},
+    {city: "Rome", code: "RME"},
+    {city: "Jamaica", code: "JMA"}
 ];
 
 //Function to help with the dropdown

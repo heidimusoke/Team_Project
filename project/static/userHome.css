@@ -11,7 +11,7 @@
 
 html, body {
     margin: 0;
-    height: auto;      /* let content dictate height */
+    height: auto;      /*lets the content dictate height*/
     width: 100%;
     overflow-x: hidden;
 }
@@ -188,14 +188,14 @@ h1, h2 {
     
 }
 
-/*Track that slides left/right */
+/*Track that slides left and right */
 #carousel-track {
     display: flex;
     gap: 20px;
     transition: transform 0.5s ease;
 }
 
-/*Each slide*/
+
 .slide {
     width: 60%;
     flex-shrink: 0;
@@ -210,7 +210,7 @@ h1, h2 {
     transform: scale(1);
 }
 
-/*controls*/
+
 #carousel-controls {
     display: flex;
     justify-content: center;
@@ -235,7 +235,7 @@ h1, h2 {
     transform: scale(1.15);
 }
 
-/*Dots*/
+
 #dots {
     display: flex;
     gap: 10px;
@@ -258,7 +258,6 @@ h1, h2 {
     background: white;
 }
 
-/*bottom section*/
 #bottom {
     background: #0A1A2F;
     backdrop-filter: blur(6px);
@@ -297,4 +296,15 @@ h1, h2 {
     opacity: 0.8;
 }
 
+#class{
+    width: 100%;
+    padding: 10px;
+    font-size: 15px;
+    border-radius: 8px;
+    border: 2px solid grey;
+    
+    background-color: white;
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
 
