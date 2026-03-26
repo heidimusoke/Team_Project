@@ -1,18 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Add Baggage</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='addBaggage.css') }}">
 </head>
 <body>
-    <div id="topBar">
-        <h1> Main Title </h1>
-    </div>
 
-    <div id = "mainBox">
-        <h1> Chunk of text here </h1>
-    </div>
+<h1>Add Baggage</h1>
+
+<p>
+    Passenger: {{ booking['customerName'] }} {{ booking['bookingID'] }}
+</p>
+
+<form method="POST">
+    <label>Number of Bags:</label>
+    <select name="numberOfBags">
+        <option value="1">1 Bag (€25)</option>
+        <option value="2">2 Bags (€50)</option>
+        <option value="3">3 Bags (€75)</option>
+    </select>
+
+    <br><br>
+
+    <button type="submit">Confirm</button>
+</form>
 
 </body>
 </html>
