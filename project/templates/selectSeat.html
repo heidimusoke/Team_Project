@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seat Selection</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='airplane.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='selectSeat.css') }}">
 </head>
 
 <body>
@@ -12,8 +12,10 @@
 
     <div class="topBar">
          <h1>Select Seat</h1>
-    </div>
+
 <div class="seat-container">
+
+
 <table border="1">
 
 <tr>
@@ -23,13 +25,13 @@
 
 {% if seat.bookingID == None %}
 
-<button type="button" onclick="selectSeat('{{ seat.seatID }}')">
+<button type="button" class = "seatButton" onclick="selectSeat('{{ seat.seatID }}', this)">
 {{ seat.seatNumber }}
 </button>
 
 {% else %}
 
-<button disabled style="background-color: grey;">
+<button class = "seatButton-booked"disabled style="background-color: grey;">
 {{ seat.seatNumber }}
 </button>
 
@@ -70,7 +72,7 @@ Card Name:
 
 Card Number:
 <input type="text" id="creditCardNumber"name="creditCardNumber" minlength = "16" maxlength = "16" required>
-
+<br>
 CVV:
 <input type="text" id="creditCardCvv"name="creditCardCvv" minlength = "3"maxlength = "3" required>
 
@@ -147,9 +149,16 @@ function checkSeat(){
     }
     return true;
 }
-function selectSeat(seatID){
+
+function selectSeat(seatID, btn){
     document.getElementById("seatID").value = seatID;
-    alert("Seat selected");
+
+    //remove highlight from all seats
+    document.querySelectorAll(".seatButton").forEach(b => b.classList.remove("selected"));
+
+    //highlight selected seat
+    btn.classList.add("selected");
 }
+
 </script>
 
