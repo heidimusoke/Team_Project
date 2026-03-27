@@ -317,20 +317,53 @@ def deleteBooking(bookingID):
         return render_template("deleteBooking.html", booking=booking)
 
 #add baggage  (not done yet, i do more on weekend)
-#app.route("/addBagge/<text:customerName>/", methods=["GET", "POST"])
-#def addBaggage(customerName):
-#  conn = getDbConnection()
-#   b = conn.execute("""SELECT * from Booking WHERE cusomerName = ?""", (cusomerName,)).fetchone()
+@app.route("/addBaggage/<int:bookingID>/", methods=["GET", "POST"])
+def addBaggage(bookingID):
+    conn = getDbConnection()
 
-#   if b is None:
-#       conn.close()
-#       return 
-#       """
-#       <script>
-#           alert('Booking does not exist');
-#           window.history.back();
-#       </script>
-#       """
+    booking = conn.execute("""
+        SELECT 
+            Booking.bookingID,
+            Customer.customerName,
+            Customer.customerLastName
+        FROM Booking
+        LEFT JOIN Customer ON Booking.customerID = Customer.customerID
+        WHERE Booking.bookingID = ?
+    """, (bookingID,)).fetchone()
+
+    if booking is None:
+        conn.close()
+        return """
+        <script>
+            alert('Booking does not exist');
+            window.history.back();
+        </script>
+        """
+
+    if request.method == "POST":
+        numberOfBags = int(request.form["numberOfBags"])
+        totalCost = numberOfBags * 25
+
+        fullName = booking["customerName"] + " " + booking["customerLastName"]
+
+        conn.execute("""
+            INSERT INTO Baggage (bookingID, customerName, numberOfBags, totalCost)
+            VALUES (?, ?, ?, ?)
+        """, (bookingID, fullName, numberOfBags, totalCost))
+
+        conn.execute("""
+            UPDATE Booking
+            SET totalCost = totalCost + ?
+            WHERE bookingID = ?
+        """, (totalCost, bookingID))
+
+        conn.commit()
+        conn.close()
+
+        return redirect(url_for("showBooking", bookingID=bookingID))
+
+    conn.close()
+    return render_template("addBaggage.html", booking=booking)
 
 
 
