@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flight Booking system</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='userHome.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 </head>
 <body>
@@ -39,6 +41,11 @@
                 <ul id="to-results" class="results"></ul>
             </div>
         </div>
+            <div class="search-field">
+                <label for="departure-date">Departure Date</label>
+                <input name = "departure-date" id="departure-date" placeholder="Select departure date">
+            </div>
+
 
             <div id = "guest"> Passenger/Class: <label for="class"></label>
 
@@ -123,7 +130,8 @@ const airports = [
     {city:"Cape Town", code:"CPT"},
     {city:"Istanbul", code: "IST"},
     {city: "Rome", code: "RME"},
-    {city: "Jamaica", code: "JMA"}
+    {city: "Jamaica", code: "JMA"},
+    {city: "Entebbe", code: "EBB"}
 ];
 
 //Function to help with the dropdown
@@ -207,6 +215,15 @@ dots.forEach((dot, i) => {
 });
 
 updateCarousel();
+
+//For calendar
+flatpickr("#departure-date", {
+    dateFormat: "d/m/Y",
+    minDate: "today",
+    animate: true,
+    disableMobile: true
+});
+
 
 </script>
 </body>

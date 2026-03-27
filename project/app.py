@@ -103,12 +103,13 @@ def searchFlights():
     if request.method == "POST":
         departure = request.form["departure"]
         destination = request.form["destination"]
+        date = request.form["departure-date"]
 
         conn = getDbConnection()
         flights = conn.execute("""
             SELECT * FROM Flight
-            WHERE departure = ? AND destination = ?
-        """, (departure, destination)).fetchall()
+            WHERE departure = ? AND destination = ? AND departureDate = ?
+        """, (departure, destination,date,)).fetchall()
         conn.close()
 
     return render_template("searchFlights.html", flights=flights)

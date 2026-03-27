@@ -18,18 +18,21 @@
     <div class="main">
         <div id="loginSection">
             <div id="loginInput">
-
+                    <h2>Enter Login Details</h2>
                     <form action="/adminLogin" method="POST">
-
+                        <div class = "email">
                         <label>Email</label>
                         <input id="username" name="username" type="text" required>
+                        </div>
                         <br>
                         <br>
+                        <div class = "password">
                         <label>Password</label>
                         <input id="password" name="password" type="password" required>
+                        </div>
                         <br>
                         <br>
-                        <button id="login" type="submit">Login</button>
+                        <div id = loginButtonDiv><button id="login" type="submit">Login</button></div>
 
                     </form>
 
