@@ -59,10 +59,9 @@ button {
     max-width: 1000px;
     border-radius: 15px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    
-    /*important for placing it in center*/
     margin: 50px auto; 
 }
+
 #display table {
     width: 100%;
     border-collapse: collapse;
