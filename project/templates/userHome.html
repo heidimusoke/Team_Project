@@ -42,7 +42,7 @@
         </div>
             <div class="search-field">
                 <label for="departure-date">Departure Date</label>
-                <input name = "departure-date" id="departure-date" placeholder="Select departure date">
+                <input name = "departure-date" id="departure-date" placeholder="Select departure date" required>
             </div>
 
 
@@ -215,7 +215,7 @@ dots.forEach((dot, i) => {
 
 updateCarousel();
 
-//For calendar
+//For the calendar
 flatpickr("#departure-date", {
     dateFormat: "d/m/Y",
     minDate: "today",
