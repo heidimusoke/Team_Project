@@ -1,6 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for
 import sqlite3
 from flask import jsonify
+
+import smtplib
+from email.mime.text import MIMEText
 #Important notes if conflused
 # app.route is the way to webpages which i put in templates folder as flask only reads templates (got an error so changed it to templates)
 #so far add is a work in progress show is there and search too will try booking soon
@@ -12,6 +15,39 @@ def getDbConnection():
     conn = sqlite3.connect("AirPlaneSystem.db")
     conn.row_factory = sqlite3.Row
     return conn
+
+
+
+#emailing ticket
+def sendBookingEmail(to_email, customer_name, booking_id, flight_id):
+    sender_email = "qadersufyan@gmail.com"
+    sender_password = "fmtpmhflqpxjichm"
+
+    subject = "Flight Booking Confirmation"
+
+    body = f"""
+hello {customer_name},
+
+Your booking has been confirmed.
+
+Booking Reference: {booking_id}
+Flight Details: {flight_id}
+
+Thank you for booking with us.
+TQHP Flights.
+"""
+
+    msg = MIMEText(body)
+    msg["Subject"] = subject
+    msg["From"] = sender_email
+    msg["To"] = to_email
+
+    with smtplib.SMTP("smtp.gmail.com", 587) as server:
+        server.starttls()
+        server.login(sender_email, sender_password)
+        server.send_message(msg)
+
+
 
 
 # Customer Home Page
@@ -223,6 +259,8 @@ def addBooking():
     conn.commit()
     conn.close()
 
+    sendBookingEmail(email, name, bookingID, flightID)
+
     return redirect(url_for("showBooking", bookingID=bookingID))
 
 #show booking
@@ -316,7 +354,7 @@ def deleteBooking(bookingID):
         conn.close()
         return render_template("deleteBooking.html", booking=booking)
 
-#add baggage  (not done yet, i do more on weekend)
+#add baggage  (did not work)
 @app.route("/addBaggage/<int:bookingID>/", methods=["GET", "POST"])
 def addBaggage(bookingID):
     conn = getDbConnection()
@@ -364,7 +402,6 @@ def addBaggage(bookingID):
 
     conn.close()
     return render_template("addBaggage.html", booking=booking)
-
 
 
 #############################################################
