@@ -19,8 +19,6 @@
                 
                 <br><input id = "id" name = "bookingID" placeholder = "Booking Id" required></p><br>
                 
-                <p><label>Last Name</label>
-                <br><input id = "ln" name = "lastName" placeholder = "Last Name" required></p><br>
                 <div id = "buttondiv">
                 <button id = "search" onclick= "getBooking()"> Search</button><br>
                 <button class = "backButton" type ="button" onclick="location.href='/'">Go Back</button>
@@ -36,7 +34,6 @@
         <script>
         function getBooking(){
             let id = document.getElementById("id").value.trim();
-            let ln = document.getElementById("ln").value.trim();
             location.href = "/showBooking/" + id;
         }
     </script>
