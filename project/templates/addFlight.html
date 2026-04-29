@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Flight</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='airplane.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/airbnb.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </head>
 <body>
     <!--<h1> Airplane Booking System</h1>-->
@@ -22,12 +26,20 @@
         <h2> Create a new Flight</h2>
         Departure: <input type="text" name="departure" required><br><br>
         Destination: <input type="text" name="destination" required><br><br>
-        Departure Date: <input type="text" name="departureDate" required><br><br>
-        DepartureTime: <input type="text" name="departureTime" required><br><br>
-        Arrival Date: <input type="text" name="arrivalDate" required><br><br>
-        Arrival Time: <input type="text" name="arrivalTime" required><br><br>
+        Departure Date: <input type = "text" name = "departureDate" id="departureDate" placeholder="  Select departure date" required><br><br>
+        DepartureTime: <input type="text" name="departureTime" id = "departureTime" required><br><br>
+        Arrival Date: <input type = "text" name = "arrivalDate" id="arrivalDate" placeholder="  Select Arrival date" required><br><br>
+        Arrival Time: <input type="text" name="arrivalTime" id = "arrivalTime" required><br><br>
         Number of Seats: <input type="text" name="numberSeats" required><br><br>
-        Airline: <input type="text" name="" required><br><br>
+        <label for="airline">Airline</label>
+      <select name="airline" id="airline" required>
+        <option value="">Select an airline</option>
+        {% for airline in airlines %}
+            <option value="{{ airline[0] }}">{{ airline[1] }}</option>
+        {% endfor %}
+    </select>
+        <br><br>
+
 
         
 
@@ -43,4 +55,36 @@
 
     
 </body>
+<script>
+//For the calendar
+flatpickr("#departureDate", {
+    dateFormat: "d/m/Y",
+    minDate: "today",
+    animate: true,
+    disableMobile: true
+});
+
+flatpickr("#arrivalDate", {
+    dateFormat: "d/m/Y",
+    minDate: "today",
+    animate: true,
+    disableMobile: true
+});
+
+flatpickr("#departureTime", {
+    enableTime: true,
+    noCalendar: true,
+    dateFormat: "H:i",
+    time_24hr: true,
+    minuteIncrement: 5
+});
+
+flatpickr("#arrivalTime", {
+    enableTime: true,
+    noCalendar: true,
+    dateFormat: "H:i",
+    time_24hr: true,
+    minuteIncrement: 5
+});
+</script>
 </html>

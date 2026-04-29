@@ -175,6 +175,22 @@ button {
 .flatpickr-next-month svg {
     fill: #ffffff;
 }
+/*For the time flat pickr*/
+input[type="text"] {
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    width: 220px;
+    background: white;
+    transition: 0.2s ease;
+}
+
+input[type="text"]:focus {
+    border-color: #0A1A2F;
+    box-shadow: 0 0 8px rgba(10, 26, 47, 0.3);
+    outline: none;
+}
 
 /* SEARCH BAR ADDITIONS */
 
@@ -378,4 +394,14 @@ td button {
 }
 table {
     margin: auto;
+}
+
+select {
+    width: 220px;        
+    padding: 12px;       
+    border-radius: 10px; 
+    border: 1px solid #ccc;
+    font-size: 16px;
+    background: white;
+    cursor: pointer;
 }

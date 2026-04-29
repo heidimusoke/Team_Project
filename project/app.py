@@ -95,6 +95,7 @@ def showFlights():
 # Add Flight (Admin later)
 @app.route("/addFlight", methods=["GET", "POST"])
 def addFlight():
+
     if request.method == "POST":
         departure = request.form["departure"]
         destination = request.form["destination"]
@@ -103,24 +104,29 @@ def addFlight():
         arrivalDate = request.form["arrivalDate"]
         arrivalTime = request.form["arrivalTime"]
         numberSeats = request.form["numberSeats"]
+        airline_id = request.form["airline"]
 
         conn = getDbConnection()
         cur = conn.cursor()
+
         cur.execute("""
             INSERT INTO Flight 
-            (departure, destination, departureDate, departureTime, arrivalDate, arrivalTime, numberSeats)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
-        """, (departure, destination, departureDate, departureTime, arrivalDate, arrivalTime, numberSeats))
+            (departure, destination, departureDate, departureTime, arrivalDate, arrivalTime, numberSeats, airlineID)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        """, (departure, destination, departureDate, departureTime, arrivalDate, arrivalTime, numberSeats, airline_id))
 
         flight_id = cur.lastrowid
+
+        # Clear seats for this flight
         cur.execute("DELETE FROM Seat WHERE flightNumber = ?", (flight_id,))
-        #for loop to make seats based on how many seats in flight
+
+        # Create seats
         for i in range(1, int(numberSeats) + 1):
             seat_number = f"S{i}"
-            seat_cost = 100  # temp number we can change as we go on
+            seat_cost = 100
 
             cur.execute("""
-            INSERT INTO Seat (seatNumber, seatCost, bookingID, flightNumber)
+                INSERT INTO Seat (seatNumber, seatCost, bookingID, flightNumber)
                 VALUES (?, ?, NULL, ?)
             """, (seat_number, seat_cost, flight_id))
 
@@ -129,7 +135,15 @@ def addFlight():
 
         return redirect(url_for("showFlights"))
 
-    return render_template("addFlight.html")
+    #getting the airlines
+    conn = getDbConnection()
+    cur = conn.cursor()
+    cur.execute("SELECT airlineID, airlineName FROM Airline")
+    airlines = cur.fetchall()
+    conn.close()
+
+    return render_template("addFlight.html", airlines=airlines)
+
 
 
 # Search Flights
