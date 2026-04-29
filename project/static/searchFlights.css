@@ -82,6 +82,7 @@ body {
     align-items: center;
     position: relative;
     padding-top: 30px;
+    color: black
 }
 .entry {
     display: flex;                
@@ -225,7 +226,7 @@ input {
     align-items: center;
     background: rgba(0, 74, 173, 0.25);
     backdrop-filter: blur(4px);
-    color: white;
+    color: black;
     padding: 30px;
     width: 90%;
     max-width: 1000px;

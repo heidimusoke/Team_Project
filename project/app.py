@@ -186,7 +186,7 @@ def editFlight(flightID):
         arrDate = request.form["Arrival Date"]
         arrTime = request.form["Arrival Time"]
         numSeats = request.form["Number of seats"]
-        airlineID = request.form["Airline ID"]
+        airlineID = request.form["airline"]
 
         conn.execute("""UPDATE Flight
                      SET departure = ?, destination = ?, departureDate = ?, departureTime = ?, arrivalDate = ?, arrivalTime = ?, numberSeats =?, airlineID = ?  WHERE flightNumber = ?""", (dept, dest, deptDate, deptTime, arrDate, arrTime, numSeats, airlineID, flightID))
@@ -196,8 +196,11 @@ def editFlight(flightID):
 
     # GET REQUEST FOR THE FORM
     flight = conn.execute("SELECT * FROM Flight WHERE flightNumber =?", (flightID,)).fetchone()
+    # GET request → fetch airlines for dropdown
+    airlines = conn.execute("SELECT airlineID, airlineName FROM Airline").fetchall()
+
     conn.close()
-    return render_template("editFlight.html", flight=flight)
+    return render_template("editFlight.html", flight=flight, airlines = airlines)
 
 #delete flight
 @app.route("/deleteFlight/<int:flightID>", methods = ["GET", "POST"])

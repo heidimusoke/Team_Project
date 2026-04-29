@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Flight</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='airplane.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/airbnb.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
 </head>
 <body>
         <div class = "topBar">
@@ -27,22 +31,35 @@
         <input type="text" name="Destination" value="{{ flight['destination'] }}" required><br><br>
 
         Departure Date:
-        <input type="text" name="Departure Date" value="{{ flight['departureDate'] }}" required><br><br>
+        <input type="text" id="departureDate" name="Departure Date" value="{{ flight['departureDate'] }}" required><br><br>
+
 
         Departure Time:
-        <input type="text" name="Departure Time" value="{{ flight['departureTime'] }}" required><br><br>
+        <input type="text" id="departureTime" name="Departure Time" value="{{ flight['departureTime'] }}" required><br><br>
+
 
         Arrival Date:
-        <input type="text" name="Arrival Date" value="{{ flight['arrivalDate'] }}" required><br><br>
+        <input type="text" id="arrivalDate" name="Arrival Date" value="{{ flight['arrivalDate'] }}" required><br><br>
+
 
         Arrival Time:
-        <input type="text" name="Arrival Time" value="{{ flight['arrivalTime'] }}" required><br><br>
+        <input type="text" id="arrivalTime" name="Arrival Time" value="{{ flight['arrivalTime'] }}" required><br><br>
+
 
         Number of seats:
         <input type="text" name="Number of seats" value="{{ flight['numberSeats'] }}" required><br><br>
+        <label for="airline">Airline</label>
+        <select name="airline" id="airline" required>
+            <option value="">Select an airline</option>
+            {% for airline in airlines %}
+                <option value="{{ airline[0] }}"
+                    {% if airline[0] == flight['airlineID'] %}selected{% endif %}>
+                    {{ airline[1] }}
+                </option>
+            {% endfor %}
+        </select>
+        <br><br>
 
-        Airline ID:
-        <input type="text" name="Airline ID" value="{{ flight['airlineID'] }}" required><br><br>
 
         <button class = "button" type="submit">Save Changes</button>
         <button class = "backButton" type ="button" onclick="location.href='/admin'">Back</button>
@@ -58,4 +75,34 @@
    
 
 </body>
+<script>
+flatpickr("#departureDate", {
+    dateFormat: "Y-m-d",
+    defaultDate: "{{ flight['departureDate'] }}"
+});
+
+flatpickr("#arrivalDate", {
+    dateFormat: "Y-m-d",
+    defaultDate: "{{ flight['arrivalDate'] }}"
+});
+
+flatpickr("#departureTime", {
+    enableTime: true,
+    noCalendar: true,
+    dateFormat: "H:i",
+    time_24hr: true,
+    minuteIncrement: 5,
+    defaultDate: "{{ flight['departureTime'] }}"
+});
+
+flatpickr("#arrivalTime", {
+    enableTime: true,
+    noCalendar: true,
+    dateFormat: "H:i",
+    time_24hr: true,
+    minuteIncrement: 5,
+    defaultDate: "{{ flight['arrivalTime'] }}"
+});
+</script>
+
 </html>
