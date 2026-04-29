@@ -27,13 +27,6 @@ body {
     width: auto;
 }
 
-.main {
-    padding: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
 
 button {
     width: 220px;
@@ -90,7 +83,7 @@ button {
 }
 
 .seatButton {
-    width: 60px;
+    width: 60px ;
     height: 60px;
     border-radius: 12px;
     border: none;
@@ -114,6 +107,8 @@ button {
 .seatButton.booked {
     background: #999;
     cursor: not-allowed;
+    width: 60px;
+    height: 60px;
 }
 
 .seat-container table {
@@ -132,8 +127,8 @@ td {
 }
 
 td button {
-    width: 150px;
-    height: 45px;
+    width: 60px;
+    height: 60px;
 }
 table {
     margin: auto;
